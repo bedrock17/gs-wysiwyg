@@ -1,4 +1,7 @@
 <template>
+    <div class="gs-editor" contenteditable>
+        
+    </div>
 </template>
 
 <script lang="ts">

@@ -38,17 +38,30 @@
 		</v-app-bar>
 
 		<v-content>
+			<editor/>
 		</v-content>
 	</v-app>
 </template>
 
+<style lang="css">
+    .gs-editor {
+		border: 1px solid rgb(22, 97, 181);
+		/* border-radius: 10px; */
+        width: calc(100%-20px);
+        min-height: 200px;
+		margin: 10px;
+    }
+</style>
+
 <script lang="ts">
 import Vue from 'vue';
+import editor from './gs-wysiwyg-editor.vue';
 
 export default Vue.extend({
 	name: 'App',
 
 	components: {
+		editor,
 	},
 
 	data: () => ({
