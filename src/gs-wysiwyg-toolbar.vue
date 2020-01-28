@@ -709,6 +709,7 @@
 </template>
 
 <script lang="ts">
+/* tslint:disable */
 import Vue from 'vue';
 import Lang from './languages/Lang.js';
 
