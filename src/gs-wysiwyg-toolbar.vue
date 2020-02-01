@@ -715,6 +715,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import Lang from './languages/Lang.js';
+import ICC from './icc';
+
 
 export default Vue.extend({
 	name: 'Toolbar',
@@ -838,6 +840,10 @@ export default Vue.extend({
 	},
 
 	components: {
+	},
+
+	mounted() {
+		ICC['editor-icc'].emit('editor-icc', 'Hello', 'World');
 	},
 
 	data: () => ({
