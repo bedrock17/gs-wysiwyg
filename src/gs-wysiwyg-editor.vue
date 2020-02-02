@@ -1,9 +1,9 @@
 <template>
 	<div>
-		<div class="gs-editor" ref="editor" contenteditable>
+		<div class="gs-editor" ref="editor" contenteditable @input="handleInput">
 		</div>
 
-		<v-btn v-on:click=getContent> getHTML </v-btn>
+		
 	</div>
 </template>
 
@@ -21,8 +21,8 @@ export default Vue.extend({
 		editor: new GSEditor(''),
 	}),
 	methods: {
-		getContent(): void {
-			console.log(this.editor.getHTML());
+		handleInput(): void {
+			this.$emit('input', this.editor.getHTML());
 		},
 	},
 	mounted() {

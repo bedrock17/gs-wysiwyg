@@ -3,7 +3,10 @@
 		<v-content>
 			<GSToolbar/>
 			<br><hr><br>
-			<GSEditor/>
+			<GSEditor ref="GSEditor" v-model="htmlText"/>
+
+			{{ htmlText }}
+			
 		</v-content>
 	</v-app>
 </template>
@@ -32,7 +35,11 @@ export default Vue.extend({
 	},
 
 	data: () => ({
-		//
+		htmlText: '',
 	}),
+
+	methods: {
+		//
+	},
 });
 </script>
