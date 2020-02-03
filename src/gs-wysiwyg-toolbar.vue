@@ -47,7 +47,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="changeAlign('left')">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('left')">
 							<v-icon>mdi-format-align-left</v-icon>
 						</v-btn>
 					</template>
@@ -55,7 +55,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="changeAlign('center')">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('center')">
 							<v-icon>mdi-format-align-center</v-icon>
 						</v-btn>
 					</template>
@@ -63,7 +63,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="changeAlign('right')">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('right')">
 							<v-icon>mdi-format-align-right</v-icon>
 						</v-btn>
 					</template>
@@ -71,7 +71,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="changeAlign('justify')">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('justify')">
 							<v-icon>mdi-format-align-justify</v-icon>
 						</v-btn>
 					</template>
@@ -86,7 +86,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile class="d-md-none" @click="textBarToggle" active-class="white" v-on="on">
+						<v-btn icon tile class="d-md-none pa-0 mx-0" @click="textBarToggle" active-class="white" v-on="on">
 							<v-icon>mdi-format-title</v-icon>
 						</v-btn>
 					</template>
@@ -254,7 +254,7 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleBold">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
@@ -262,7 +262,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleItalic">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
 							<v-icon>mdi-format-italic</v-icon>
 						</v-btn>
 					</template>
@@ -270,7 +270,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleUnderline">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
 							<v-icon>mdi-format-underline</v-icon>
 						</v-btn>
 					</template>
@@ -278,7 +278,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleStrike">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
 							<v-icon>mdi-format-strikethrough-variant</v-icon>
 						</v-btn>
 					</template>
@@ -294,7 +294,7 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleSub">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSub">
 							<v-icon>mdi-format-subscript</v-icon>
 						</v-btn>
 					</template>
@@ -302,7 +302,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleSuper">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSuper">
 							<v-icon>mdi-format-superscript</v-icon>
 						</v-btn>
 					</template>
@@ -340,7 +340,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="changeAlign('left')">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('left')">
 							<v-icon>mdi-format-align-left</v-icon>
 						</v-btn>
 					</template>
@@ -348,7 +348,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="changeAlign('center')">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('center')">
 							<v-icon>mdi-format-align-center</v-icon>
 						</v-btn>
 					</template>
@@ -356,7 +356,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="changeAlign('right')">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('right')">
 							<v-icon>mdi-format-align-right</v-icon>
 						</v-btn>
 					</template>
@@ -364,7 +364,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="changeAlign('justify')">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('justify')">
 							<v-icon>mdi-format-align-justify</v-icon>
 						</v-btn>
 					</template>
@@ -442,7 +442,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleBold">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
@@ -450,7 +450,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleItalic">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
 							<v-icon>mdi-format-italic</v-icon>
 						</v-btn>
 					</template>
@@ -458,7 +458,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleUnderline">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
 							<v-icon>mdi-format-underline</v-icon>
 						</v-btn>
 					</template>
@@ -466,7 +466,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleStrike">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
 							<v-icon>mdi-format-strikethrough-variant</v-icon>
 						</v-btn>
 					</template>
@@ -482,7 +482,7 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleSub">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSub">
 							<v-icon>mdi-format-subscript</v-icon>
 						</v-btn>
 					</template>
@@ -490,7 +490,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleSuper">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSuper">
 							<v-icon>mdi-format-superscript</v-icon>
 						</v-btn>
 					</template>
@@ -634,7 +634,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleBold">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
@@ -642,7 +642,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleItalic">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
 							<v-icon>mdi-format-italic</v-icon>
 						</v-btn>
 					</template>
@@ -650,7 +650,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleUnderline">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
 							<v-icon>mdi-format-underline</v-icon>
 						</v-btn>
 					</template>
@@ -658,7 +658,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleStrike">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
 							<v-icon>mdi-format-strikethrough-variant</v-icon>
 						</v-btn>
 					</template>
@@ -674,7 +674,7 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleSub">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSub">
 							<v-icon>mdi-format-subscript</v-icon>
 						</v-btn>
 					</template>
@@ -682,7 +682,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="toggleSuper">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSuper">
 							<v-icon>mdi-format-superscript</v-icon>
 						</v-btn>
 					</template>
@@ -717,6 +717,11 @@ import Vue from 'vue';
 import Lang from './languages/Lang.js';
 import ICC from './icc';
 
+const EmitICC = (method: string, ...args: any[]) => {
+	ICC['editor-icc'].emit
+		.apply(ICC['editor-icc'], [method, args]);
+};
+
 
 export default Vue.extend({
 	name: 'Toolbar',
@@ -728,112 +733,148 @@ export default Vue.extend({
 		erase() {
 			// tslint:disable-next-line
 			console.log("clicked erase");
+			EmitICC('erase');
 		},
 		undo() {
 			// tslint:disable-next-line
 			console.log("clicked undo");
+			EmitICC('undo');
 		},
 		redo() {
 			// tslint:disable-next-line
 			console.log("clicked redo");
+			EmitICC('redo');
 		},
 		/* E:Work Flow */
 
 		/* S:Text Align */
 		changeAlign(align: string) {
 			// tslint:disable-next-line
-			console.log("clicked changeAlign", align);
+			console.log("clicked change-align", align);
+			EmitICC('change-align', align);
 		},
 		/* E:Text Align */
 
 
 		textBarToggle() {
 			// tslint:disable-next-line
-			console.log("clicked textBarToggle");
+			console.log("clicked textbar-toggle");
 			this.tb.toggle.textBar = !this.tb.toggle.textBar;
 		},
 
 		/* S:Text Color */
 		textFrontColorChange() {
 			// tslint:disable-next-line
-			console.log("clicked textFrontColorChange");
+			console.log("clicked text-front-color-change");
+			const color = this.tb.toggle.tColor;
+			EmitICC('text-front-color-change', color);
 		},
 		textBackColorChange() {
 			// tslint:disable-next-line
-			console.log("clicked textBackColorChange");
+			console.log("clicked text-back-color-change");
+			const color = this.tb.toggle.bColor;
+			EmitICC('text-back-color-change', color);
 		},
 		/* E:Text Color */
 
 		/* S:Utility */
 		insertPicture() {
 			// tslint:disable-next-line
-			console.log("clicked insertPicture");
+			console.log("clicked insert-picture");
+			EmitICC('insert-picture');
 		},
 		insertTable() {
 			// tslint:disable-next-line
-			console.log("clicked insertTable");
+			console.log("clicked insert-table");
+			EmitICC('insert-table');
 		},
 		viewHTML() {
 			// tslint:disable-next-line
-			console.log("clicked viewHTML");
+			console.log("clicked view-html");
+			EmitICC('view-html');
 		},
 		viewMarkDown() {
 			// tslint:disable-next-line
-			console.log("clicked viewMarkDown");
+			console.log("clicked view-markdown");
+			EmitICC('view-markdown');
 		},
 		/* E:Utility */
 
 		/* S:Text Etc */
 		codeBlock() {
 			// tslint:disable-next-line
-			console.log("change codeBlock");
+			console.log("change code-block");
+			const code = this.tb.code.cur;
+			EmitICC('code-block', code);
 		},
 		tagChange() {
 			// tslint:disable-next-line
-			console.log("change tagChange");
+			console.log("change tag-change");
+			const tag = this.tb.tag.cur;
+			EmitICC('tag-change', tag);
 		},
 		fontChange() {
 			// tslint:disable-next-line
-			console.log("change fontChange");
+			console.log("change font-change");
+			const font = this.tb.font.cur;
+			EmitICC('font-change', font);
 		},
 		sizeChange() {
 			// tslint:disable-next-line
-			console.log("change sizeChange");
+			console.log("change size-change");
+			const size = this.tb.size.cur;
+			EmitICC('size-change', size);
 		},
 		/* E:Text Etc */
 
 		/* S:Text Format */
 		toggleBold() {
 			// tslint:disable-next-line
-			console.log("clicked toggleBold");
+			console.log("clicked toggle-bold");
+			this.toggle.bold = !this.toggle.bold;
+			EmitICC('toggle-bold', this.toggle.bold);
 		},
 		toggleItalic() {
 			// tslint:disable-next-line
-			console.log("clicked toggleItalic");
+			console.log("clicked toggle-italic");
+			this.toggle.italic = !this.toggle.italic;
+			EmitICC('toggle-italic', this.toggle.italic);
 		},
 		toggleUnderline() {
 			// tslint:disable-next-line
-			console.log("clicked toggleUnderline");
+			console.log("clicked toggle-underline");
+			this.toggle.underline = !this.toggle.underline;
+			EmitICC('toggle-underline', this.toggle.underline);
 		},
 		toggleStrike() {
 			// tslint:disable-next-line
-			console.log("clicked toggleStrike");
+			console.log("clicked toggle-strike");
+			this.toggle.strike = !this.toggle.strike;
+			EmitICC('toggle-strike', this.toggle.strike);
 		},
 		toggleSub() {
 			// tslint:disable-next-line
-			console.log("clicked toggleSub");
+			console.log("clicked toggle-sub");
+			this.toggle.super = false;
+			this.toggle.sub = !this.toggle.sub;
+			EmitICC('toggle-sub-super', this.toggle.sub, this.toggle.super);
 		},
 		toggleSuper() {
 			// tslint:disable-next-line
 			console.log("clicked toggleSuper");
+			this.toggle.super = !this.toggle.super;
+			this.toggle.sub = false;
+			EmitICC('toggle-sub-super', this.toggle.sub, this.toggle.super);
 		},
 		addLink() {
 			// tslint:disable-next-line
-			console.log("clicked addLink");
+			console.log("clicked add-link");
+			EmitICC('add-link');
 		},
 		delLink() {
 			// tslint:disable-next-line
 			console.log("clicked delLink");
+			EmitICC('del-link');
 		},
 		/* E:Text Format */
 
@@ -848,6 +889,15 @@ export default Vue.extend({
 
 	data: () => ({
 		ignore: {},
+
+		toggle: {
+			bold: false,
+			italic: false,
+			underline: false,
+			strike: false,
+			sub: false,
+			super: false,
+		},
 
 		tb: { //toolbar
 			lang: 'bash',

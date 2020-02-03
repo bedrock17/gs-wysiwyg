@@ -6,14 +6,18 @@ class Icc {
 	}
 
 	on(key, func) {
-		if ( typeof func === "function" ) {
-			this.evList[key.toString()] = func;
+		if ( typeof func === 'function' ) {
+			if ( typeof this.evList == 'object' ) {
+				this.evList[key.toString()] = func;
+			}
 		}
 	}
 
 	emit(key, ...argv) {
-		if ( this.evList[key] ) {
-			return this.evList[key].apply(this, argv);
+		if ( typeof this.evList === 'object' ) {
+			if ( this.evList[key] ) {
+				return this.evList[key].apply(this, argv);
+			}
 		}
 	}
 };
