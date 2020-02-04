@@ -34,13 +34,13 @@
 			<v-tooltip bottom>
 				<template v-slot:activator="{ on }">
 					<v-btn icon tile class="d-md-none" v-on="on" @click="changeAlign('auto')">
-						<v-icon v-text="'mdi-format-align-' + tb.align[tb.toggle.align]"></v-icon>
+						<v-icon v-text="'mdi-format-align-' + align[toggle.align]"></v-icon>
 					</v-btn>
 				</template>
-				<span v-text="Lang('editor.toolbar.align-' + tb.align[tb.toggle.align])"></span>
+				<span v-text="Lang('editor.toolbar.align-' + align[toggle.align])"></span>
 			</v-tooltip>
 			<v-btn-toggle
-				v-model="tb.toggle.align"
+				v-model="toggle.align"
 				class="custom d-none d-lg-flex pa-0"
 				dense
 				group
@@ -101,7 +101,7 @@
 					offset-y
 					transition="slide-y-transition"
 					color="white"
-					v-model="tb.toggle.tColorView0"
+					v-model="toggle.tColorView0"
 					fixed
 					bottom>
 					<template v-slot:activator="{ on: menu }">
@@ -116,12 +116,12 @@
 					</template>
 					<v-color-picker
 						:hide-mode-switch="true"
-						v-model="tb.toggle.tColor"
+						v-model="toggle.tColor"
 						class="custom-picker"
 						mode="hexa"
 						show-swatches></v-color-picker>
 					<v-card tile color="white" align="right">
-						<v-btn text color="grey darken-1" @click="tb.toggle.tColorView0=false; textFrontColorChange();" tile>{{ Lang('apply') }}</v-btn>
+						<v-btn text color="grey darken-1" @click="toggle.tColorView0=false; textFrontColorChange();" tile>{{ Lang('apply') }}</v-btn>
 					</v-card>
 				</v-menu>
 				<v-menu 
@@ -129,12 +129,12 @@
 					offset-y
 					transition="slide-y-transition"
 					color="white"
-					v-model="tb.toggle.bColorView0"
+					v-model="toggle.bColorView0"
 					fixed
 					bottom>
 					<v-color-picker 
 						:hide-mode-switch="true"
-						v-model="tb.toggle.bColor"
+						v-model="toggle.bColor"
 						class="custom-picker"
 						mode="hexa"
 						show-swatches></v-color-picker>
@@ -149,7 +149,7 @@
 						</v-tooltip>
 					</template>
 					<v-card tile color="white" align="right">
-						<v-btn text color="grey darken-1" @click="tb.toggle.bColorView0=false; textBackColorChange();" tile>{{ Lang('apply') }}</v-btn>
+						<v-btn text color="grey darken-1" @click="toggle.bColorView0=false; textBackColorChange();" tile>{{ Lang('apply') }}</v-btn>
 					</v-card>
 				</v-menu>
 			</div>
@@ -201,8 +201,8 @@
 					hide-details
 					class="pa-0"
 					overflow
-					:items="tb.code.list"
-					v-model="tb.code.cur"
+					:items="code.list"
+					v-model="code.cur"
 					@change="codeBlock"
 					></v-overflow-btn>
 				<v-overflow-btn
@@ -213,8 +213,8 @@
 					hide-details
 					class="pa-0"
 					overflow
-					:items="tb.tag.list"
-					v-model="tb.tag.cur"
+					:items="tag.list"
+					v-model="tag.cur"
 					@change="tagChange"
 					></v-overflow-btn>
 				<v-overflow-btn
@@ -225,8 +225,8 @@
 					hide-details
 					class="pa-0"
 					overflow
-					:items="tb.font.list"
-					v-model="tb.font.cur"
+					:items="font.list"
+					v-model="font.cur"
 					@change="fontChange"
 					></v-overflow-btn>
 				<v-overflow-btn
@@ -237,15 +237,15 @@
 					hide-details
 					class="pa-0"
 					overflow
-					:items="tb.size.list"
-					v-model="tb.size.cur"
+					:items="size.list"
+					v-model="size.cur"
 					@change="sizeChange"
 					></v-overflow-btn>
 			</div>
 			<!-- E:Text Etc -->
 			<!-- S:Text Format -->
 			<v-btn-toggle 
-				v-model="tb.toggle.format"
+				v-model="toggle.format"
 				class="d-none d-lg-flex pa-0 custom"
 				dense
 				group
@@ -286,7 +286,7 @@
 				</v-tooltip>
 			</v-btn-toggle>
 			<v-btn-toggle 
-				v-model="tb.toggle.super_sub"
+				v-model="toggle.super_sub"
 				class="d-none d-lg-flex pa-0 custom"
 				dense
 				group
@@ -333,7 +333,7 @@
 		<v-toolbar id="toolbar-2" class="custom-toolbar d-none d-md-flex d-lg-none" dense>
 			<!-- S:Text Align -->
 			<v-btn-toggle
-				v-model="tb.toggle.align"
+				v-model="toggle.align"
 				class="custom d-flex pa-0"
 				dense
 				group
@@ -379,7 +379,7 @@
 					offset-y
 					transition="slide-y-transition"
 					color="white"
-					v-model="tb.toggle.tColorView1"
+					v-model="toggle.tColorView1"
 					fixed
 					bottom>
 					<template v-slot:activator="{ on: menu }">
@@ -394,12 +394,12 @@
 					</template>
 					<v-color-picker 
 						:hide-mode-switch="true"
-						v-model="tb.toggle.tColor"
+						v-model="toggle.tColor"
 						class="custom-picker"
 						mode="hexa"
 						show-swatches></v-color-picker>
 					<v-card tile color="white" align="right">
-						<v-btn text color="grey darken-1" @click="tb.toggle.tColorView1=false; textFrontColorChange();" tile>{{ Lang('apply') }}</v-btn>
+						<v-btn text color="grey darken-1" @click="toggle.tColorView1=false; textFrontColorChange();" tile>{{ Lang('apply') }}</v-btn>
 					</v-card>
 				</v-menu>
 				<v-menu 
@@ -407,12 +407,12 @@
 					offset-y
 					transition="slide-y-transition"
 					color="white"
-					v-model="tb.toggle.bColorView1"
+					v-model="toggle.bColorView1"
 					fixed
 					bottom>
 					<v-color-picker 
 						:hide-mode-switch="true"
-						v-model="tb.toggle.bColor"
+						v-model="toggle.bColor"
 						class="custom-picker"
 						mode="hexa"
 						show-swatches></v-color-picker>
@@ -427,14 +427,14 @@
 						</v-tooltip>
 					</template>
 					<v-card tile color="white" align="right">
-						<v-btn text color="grey darken-1" @click="tb.toggle.bColorView1=false; textBackColorChange();" tile>{{ Lang('apply') }}</v-btn>
+						<v-btn text color="grey darken-1" @click="toggle.bColorView1=false; textBackColorChange();" tile>{{ Lang('apply') }}</v-btn>
 					</v-card>
 				</v-menu>
 			<!-- E:Text Color -->
 			<!-- S:Text Format -->
 			<v-divider vertical></v-divider>
 			<v-btn-toggle 
-				v-model="tb.toggle.format"
+				v-model="toggle.format"
 				class="pa-0 custom"
 				dense
 				group
@@ -474,7 +474,7 @@
 				</v-tooltip>
 			</v-btn-toggle>
 			<v-btn-toggle 
-				v-model="tb.toggle.super_sub"
+				v-model="toggle.super_sub"
 				class="pa-0 custom"
 				dense
 				group
@@ -516,7 +516,7 @@
 			</v-tooltip>
 			<!-- E:Text Format -->
 		</v-toolbar>
-		<v-toolbar id="toolbar-text" class="custom-toolbar d-md-none" v-if="tb.toggle.textBar" dense>
+		<v-toolbar id="toolbar-text" class="custom-toolbar d-md-none" v-if="toggle.textBar" dense>
 			<v-divider vertical></v-divider>
 			<!-- S:Text Color -->
 			<v-menu 
@@ -524,7 +524,7 @@
 				offset-y
 				transition="slide-y-transition"
 				color="white"
-				v-model="tb.toggle.tColorView2"
+				v-model="toggle.tColorView2"
 				fixed
 				bottom>
 				<template v-slot:activator="{ on: menu }">
@@ -539,12 +539,12 @@
 				</template>
 				<v-color-picker 
 					:hide-mode-switch="true"
-					v-model="tb.toggle.tColor"
+					v-model="toggle.tColor"
 					class="custom-picker"
 					mode="hexa"
 					show-swatches></v-color-picker>
 				<v-card tile color="white" align="right">
-					<v-btn text color="grey darken-1" @click="tb.toggle.tColorView2=false; textFrontColorChange();" tile>{{ Lang('apply') }}</v-btn>
+					<v-btn text color="grey darken-1" @click="toggle.tColorView2=false; textFrontColorChange();" tile>{{ Lang('apply') }}</v-btn>
 				</v-card>
 			</v-menu>
 			<v-menu 
@@ -552,12 +552,12 @@
 				offset-y
 				transition="slide-y-transition"
 				color="white"
-				v-model="tb.toggle.bColorView2"
+				v-model="toggle.bColorView2"
 				fixed
 				bottom>
 				<v-color-picker 
 					:hide-mode-switch="true"
-					v-model="tb.toggle.bColor"
+					v-model="toggle.bColor"
 					class="custom-picker"
 					mode="hexa"
 					show-swatches></v-color-picker>
@@ -572,7 +572,7 @@
 					</v-tooltip>
 				</template>
 				<v-card tile color="white" align="right">
-					<v-btn text color="grey darken-1" @click="tb.toggle.bColorView2=false; textBackColorChange();" tile>{{ Lang('apply') }}</v-btn>
+					<v-btn text color="grey darken-1" @click="toggle.bColorView2=false; textBackColorChange();" tile>{{ Lang('apply') }}</v-btn>
 				</v-card>
 			</v-menu>
 			<!-- S:Text Color -->
@@ -595,8 +595,8 @@
 					hide-details
 					class="pa-0"
 					overflow
-					:items="tb.tag.list"
-					v-model="tb.tag.cur"
+					:items="tag.list"
+					v-model="tag.cur"
 					@change="tagChange"
 					></v-overflow-btn>
 				<v-overflow-btn
@@ -606,8 +606,8 @@
 					hide-details
 					class="pa-0"
 					overflow
-					:items="tb.font.list"
-					v-model="tb.font.cur"
+					:items="font.list"
+					v-model="font.cur"
 					@change="fontChange"
 					></v-overflow-btn>
 				<v-overflow-btn
@@ -617,8 +617,8 @@
 					hide-details
 					class="pa-0"
 					overflow
-					:items="tb.size.list"
-					v-model="tb.size.cur"
+					:items="size.list"
+					v-model="size.cur"
 					@change="sizeChange"
 					></v-overflow-btn>
 			</div>
@@ -626,7 +626,7 @@
 			<!-- S:Text Format -->
 			<v-divider vertical></v-divider>
 			<v-btn-toggle 
-				v-model="tb.toggle.format"
+				v-model="toggle.format"
 				class="d-flex d-md-none pa-0 custom"
 				dense
 				group
@@ -666,7 +666,7 @@
 				</v-tooltip>
 			</v-btn-toggle>
 			<v-btn-toggle 
-				v-model="tb.toggle.super_sub"
+				v-model="toggle.super_sub"
 				class="d-flex d-md-none pa-0 custom"
 				dense
 				group
@@ -759,20 +759,20 @@ export default Vue.extend({
 		textBarToggle() {
 			// tslint:disable-next-line
 			console.log("clicked textbar-toggle");
-			this.tb.toggle.textBar = !this.tb.toggle.textBar;
+			this.toggle.textBar = !this.toggle.textBar;
 		},
 
 		/* S:Text Color */
 		textFrontColorChange() {
 			// tslint:disable-next-line
 			console.log("clicked text-front-color-change");
-			const color = this.tb.toggle.tColor;
+			const color = this.toggle.tColor;
 			EmitICC('text-front-color-change', color);
 		},
 		textBackColorChange() {
 			// tslint:disable-next-line
 			console.log("clicked text-back-color-change");
-			const color = this.tb.toggle.bColor;
+			const color = this.toggle.bColor;
 			EmitICC('text-back-color-change', color);
 		},
 		/* E:Text Color */
@@ -804,25 +804,25 @@ export default Vue.extend({
 		codeBlock() {
 			// tslint:disable-next-line
 			console.log("change code-block");
-			const code = this.tb.code.cur;
+			const code = this.code.cur;
 			EmitICC('code-block', code);
 		},
 		tagChange() {
 			// tslint:disable-next-line
 			console.log("change tag-change");
-			const tag = this.tb.tag.cur;
+			const tag = this.tag.cur;
 			EmitICC('tag-change', tag);
 		},
 		fontChange() {
 			// tslint:disable-next-line
 			console.log("change font-change");
-			const font = this.tb.font.cur;
+			const font = this.font.cur;
 			EmitICC('font-change', font);
 		},
 		sizeChange() {
 			// tslint:disable-next-line
 			console.log("change size-change");
-			const size = this.tb.size.cur;
+			const size = this.size.cur;
 			EmitICC('size-change', size);
 		},
 		/* E:Text Etc */
@@ -890,6 +890,25 @@ export default Vue.extend({
 	data: () => ({
 		ignore: {},
 
+		align: ['left', 'center', 'right', 'justify'],
+
+		code: {
+			cur: '',
+			list: ['bash', 'c', 'js', 'html'],
+		},
+		tag: {
+			cur: '',
+			list: ['h1', 'h2', 'h3', 'h4'],
+		},
+		font: {
+			cur: '',
+			list: ['aaa', 'bbb', 'ccc', 'ddd'],
+		},
+		size: {
+			cur: '',
+			list: ['14', '15', '16', '17'],
+		},
+
 		toggle: {
 			bold: false,
 			italic: false,
@@ -897,61 +916,18 @@ export default Vue.extend({
 			strike: false,
 			sub: false,
 			super: false,
-		},
-
-		tb: { //toolbar
-			lang: 'bash',
-			// tag: 'p',
-			// font: 'arial black',
-			// fsize: '12px',
-			align: ['left', 'center', 'right', 'justify'],
-			table: {
-				rules: [
-					(value) => {
-						if ( value === undefined ) {
-							return 'please-input';
-						}
-
-						if ( value.toString().match(/[^0-9]/g) ) {
-							return Lang('editor.table.only-number');
-						}
-						return true;
-					},
-				],
-				row: 0,
-				col: 0,
-			},
-			code: {
-				cur: '',
-				list: ['bash', 'c', 'js', 'html'],
-			},
-			tag: {
-				cur: '',
-				list: ['h1', 'h2', 'h3', 'h4'],
-			},
-			font: {
-				cur: '',
-				list: ['aaa', 'bbb', 'ccc', 'ddd'],
-			},
-			size: {
-				cur: '',
-				list: ['14', '15', '16', '17'],
-			},
-			toggle: {
-				textBar: false,
-				align: 0,
-				format: [],
-				super_sub: [],
-				tColor: '#000000',
-				tColorView0: false,
-				tColorView1: false,
-				tColorView2: false,
-				bColor: '#000000',
-				bColorView0: false,
-				bColorView1: false,
-				bColorView2: false,
-				tableDialog: false,
-			},
+			textBar: false,
+			align: 0,
+			format: [],
+			super_sub: [],
+			tColor: '#000000',
+			tColorView0: false,
+			tColorView1: false,
+			tColorView2: false,
+			bColor: '#000000',
+			bColorView0: false,
+			bColorView1: false,
+			bColorView2: false,
 		},
 	}),
 });
