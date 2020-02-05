@@ -1,7 +1,7 @@
 <template>
 	<!-- S:New Editor Toolbar -->
 	<div>
-		<v-toolbar dense>
+		<v-toolbar class="gs-custom" dense>
 			<!-- S:Work Flow -->
 			<v-divider vertical></v-divider>
 			<v-tooltip bottom>
@@ -197,7 +197,6 @@
 				<v-overflow-btn
 					depressed
 					label="Code"
-					style="max-width:110px"
 					hide-details
 					class="pa-0"
 					overflow
@@ -209,7 +208,6 @@
 					depressed
 					label="Tag"
 					name="tag"
-					style="max-width:120px"
 					hide-details
 					class="pa-0"
 					overflow
@@ -221,7 +219,6 @@
 					depressed
 					label="Font"
 					name="font"
-					style="max-width:150px"
 					hide-details
 					class="pa-0"
 					overflow
@@ -233,7 +230,6 @@
 					depressed
 					label="Size"
 					name="size"
-					style="max-width:130px"
 					hide-details
 					class="pa-0"
 					overflow
@@ -711,7 +707,18 @@
 	</div>
 	<!-- E:New Editor Toolbar -->
 </template>
+<style>
+.gs-custom
+	.v-overflow-btn
+	.v-select__selections {
+	width: auto !important;
+}
 
+.gs-custom
+	.v-toolbar__content {
+	padding: 0 !important;
+}
+</style>
 <script lang="ts">
 import Vue from 'vue';
 import Lang from './languages/Lang.js';
@@ -719,7 +726,7 @@ import ICC from './icc';
 
 const EmitICC = (method: string, ...args: any[]) => {
 	ICC['editor-icc'].emit
-		.apply(ICC['editor-icc'], [method, args]);
+		.apply(ICC['editor-icc'], [method].concat(args));
 };
 
 
@@ -813,11 +820,12 @@ export default Vue.extend({
 			const tag = this.tag.cur;
 			EmitICC('tag-change', tag);
 		},
-		fontChange() {
+		fontChange(selected: string) {
 			// tslint:disable-next-line
 			console.log("change font-change");
-			const font = this.font.cur;
-			EmitICC('font-change', font);
+			this.font.cur = selected;
+			console.log(this.font.cur);
+			EmitICC('font-change', selected);
 		},
 		sizeChange() {
 			// tslint:disable-next-line
