@@ -18,6 +18,9 @@
 		"comment-format": {
 			"severity": "warning"
 		},
-		"no-console": false
+		"no-console": false,
+		"only-arrow-functions": false,
+		"one-variable-per-declaration": false,
+		"object-literal-shorthand": [true, {"method": "always"}]
 	}
 }

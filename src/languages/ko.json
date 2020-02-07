@@ -36,7 +36,13 @@
 	"editor.toolbar.link": "링크 추가",
 	"editor.toolbar.unlink": "링크 제거",
 
-	"editor.table.create": "표 만들기",
-	"editor.table.only-number": "입력은 숫자만 할 수 있습니다."
+	"table.row.add": "행 추가",
+	"table.row.remove": "행 삭제",
+	"table.cell.add": "열 추가",
+	"table.cell.remove": "열 삭제",
+	"table.cell.merge": "셀 병합",
+	"table.cell.unmerge": "셀 병합 해제",
+	"table.remove": "표 삭제"
+
 
 }

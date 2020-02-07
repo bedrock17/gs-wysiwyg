@@ -2,8 +2,7 @@
 	<div>
 		<div class="gs-editor" ref="editor" contenteditable @input="handleInput">
 		</div>
-
-		
+		<Table/>
 	</div>
 </template>
 
@@ -11,6 +10,7 @@
 import Vue from 'vue';
 import ICC from './icc';
 import {GSEditor} from './gseditor';
+import Table from './utils/table.vue';
 
 const EICC = ICC['editor-icc'];
 
@@ -123,6 +123,7 @@ export default Vue.extend({
 	name: 'Editor',
 
 	components: {
+		Table,
 	},
 
 	data: () => ({
