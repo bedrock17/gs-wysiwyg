@@ -630,7 +630,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold">
+						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold(); return false">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
