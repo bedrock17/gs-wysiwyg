@@ -15,9 +15,19 @@ class Icc {
 
 	emit(key, ...argv) {
 		if ( typeof this.evList === 'object' ) {
-			if ( this.evList[key] ) {
-				return this.evList[key].apply(this, argv);
+			let rtn = null;
+			if ( this.evList['*:before'] ) {
+				this.evList['*:before'].apply(this, [key].concat(argv));
 			}
+
+			if ( this.evList[key] ) {
+				rtn = this.evList[key].apply(this, argv);
+			}
+
+			if ( this.evList['*:after'] ) {
+				this.evList['*:after'].apply(this, [key].concat(argv));
+			}
+			return rtn;
 		}
 	}
 };
