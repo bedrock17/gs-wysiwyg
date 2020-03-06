@@ -438,7 +438,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold">
+						<v-btn v-model="toggle.bold" icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
@@ -446,7 +446,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
+						<v-btn v-model="toggle.italic" icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
 							<v-icon>mdi-format-italic</v-icon>
 						</v-btn>
 					</template>
@@ -454,7 +454,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
+						<v-btn v-model="toggle.underline" icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
 							<v-icon>mdi-format-underline</v-icon>
 						</v-btn>
 					</template>
@@ -462,7 +462,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
+						<v-btn v-model="toggle.strike" icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
 							<v-icon>mdi-format-strikethrough-variant</v-icon>
 						</v-btn>
 					</template>
@@ -893,6 +893,20 @@ export default Vue.extend({
 
 	mounted() {
 		ICC['editor-icc'].emit('editor-icc', 'Hello', 'World');
+
+		const EICC = ICC['editor-icc'];
+		EICC.on('cursor-bold', (active: boolean) => {
+			this.toggle.bold = active;
+		});
+		EICC.on('cursor-italic', (active: boolean) => {
+			this.toggle.italic = active;
+		});
+		EICC.on('cursor-strike', (active: boolean) => {
+			this.toggle.strike = active;
+		});
+		EICC.on('cursor-underline', (active: boolean) => {
+			this.toggle.underline = active;
+		});
 	},
 
 	data: () => ({
