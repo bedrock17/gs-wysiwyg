@@ -1,6 +1,10 @@
 <template>
 	<div>
-		<div class="gs-editor" ref="editor" contenteditable @input="handleInput" @mouseup="handleMouseUp">
+		<div class="gs-editor" ref="editor" contenteditable 
+		@input="handleInput" 
+		@mouseup="updateEditerToolbar"
+		@keydown="updateEditerToolbar"
+		@keypress="updateEditerToolbar">
 		</div>
 		<Table/>
 	</div>
@@ -8,7 +12,7 @@
 
 <style>
 	.gs-editor {
-		padding: 0 2.5rem;
+		padding: 1rem 2.5rem;
 	}
 </style>
 
@@ -17,6 +21,39 @@ import Vue from 'vue';
 import ICC from './icc';
 import {GSEditor} from './editor_script/gseditor';
 import Table from './utils/table.vue';
+import Component from 'vue-class-component';
+
+// @Component 데코레이터는 클래스가 Vue 컴포넌트임을 나타냅니다.
+@Component({
+	components: {
+		Table,
+	},
+})
+export default class EditorComponent extends Vue {
+  // 초기 데이터는 인스턴스 속성으로 선언할 수 있습니다.
+  // private message: string = 'Hello!'
+	private editor: GSEditor | null = null;
+
+  // 컴포넌트 메소드는 인스턴스 메소드로 선언할 수 있습니다.
+	private handleInput(): void {
+		if (this.editor != null) {
+			this.$emit('input', this.editor.getHTML());
+		}
+	}
+
+	private updateEditerToolbar(): void {
+		// mouse up 이벤트가 발생했을 때 현재 선택된 부분을 파싱해서 ICC로 toolbar로 이벤트를 보낸다.
+		// FIXME: 실제로는 효과가 적용중인 영역이 있음 HTML 구조상
+		// 태그 영역이 아니라서 toolbar에는 비활성화 되는 문제 있음
+		if (this.editor != null) {
+			this.editor.updateToolbar();
+		}
+	}
+
+	private mounted() {
+		this.editor = new GSEditor(this.$refs.editor, ICC);
+	}
+}
 
 const EICC = ICC['editor-icc'];
 
@@ -155,27 +192,4 @@ EICC.on('del-link', () => {
 	console.log("resive event del-link");
 });
 
-export default Vue.extend({
-	name: 'Editor',
-
-	components: {
-		Table,
-	},
-
-	data: () => ({
-		editor: new GSEditor(null, null),
-	}),
-	methods: {
-		handleInput(): void {
-			this.$emit('input', this.editor.getHTML());
-		},
-		handleMouseUp(): void {
-			//mouse up 이벤트가 발생했을 때 현재 선택된 부분을 파싱해서 ICC로 toolbar로 이벤트를 보낸다.
-			this.editor.parse();
-		},
-	},
-	mounted() {
-		this.editor = new GSEditor(this.$refs.editor, ICC);
-	},
-});
 </script>

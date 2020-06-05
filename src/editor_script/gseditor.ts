@@ -8,7 +8,6 @@
 import {getRange} from './browser';
 import {Queue} from './queue';
 
-
 interface ParseState {
 	tagName: string;
 	value: boolean;
@@ -19,19 +18,19 @@ export class GSEditor {
 
 	private editorDivTagElement: any;
 	private ICC: any;
+	// private lastKeyPos
 
 	constructor(editorElement: any, icc: any) {
 		this.editorDivTagElement = editorElement;
 		this.ICC = icc;
 	}
 
-
 	public getHTML(): string {
 		return this.editorDivTagElement.innerHTML;
 	}
 
-	public parse(): void {
-
+	// 현재 상태를 파싱해서 툴바를 업데이트 한다.
+	public updateToolbar(): void {
 		const range = getRange();
 		if (range == null) {
 			return;
