@@ -80,7 +80,6 @@ table.gs-custom-table
 
 <script lang="ts">
 import Vue from 'vue';
-import Lang from '../languages/Lang';
 
 const getTablePos = function(td: any) {
 	const pos = {
@@ -290,7 +289,7 @@ export default Vue.extend({
 			context: [
 				[
 					{
-						name: Lang('table.row.add'),
+						name: this.$t('table.row.add'),
 						func: () => {
 							const cell = this.contextCell;
 							const newTable = Array();
@@ -315,7 +314,7 @@ export default Vue.extend({
 						},
 					},
 					{
-						name: Lang('table.row.remove'),
+						name: this.$t('table.row.remove'),
 						func: () => {
 							const cell = this.contextCell;
 							const newTable = Array();
@@ -331,7 +330,7 @@ export default Vue.extend({
 						},
 					},
 					{
-						name: Lang('table.cell.add'),
+						name: this.$t('table.cell.add'),
 						func: () => {
 							const cell = this.contextCell;
 							const rows = this.table;
@@ -352,7 +351,7 @@ export default Vue.extend({
 						},
 					},
 					{
-						name: Lang('table.cell.remove'),
+						name: this.$t('table.cell.remove'),
 						func: () => {
 							const cell = this.contextCell;
 							const rows = this.table;
@@ -374,7 +373,7 @@ export default Vue.extend({
 				],
 				[
 					{
-						name: Lang('table.cell.merge'),
+						name: this.$t('table.cell.merge'),
 						func: () => {
 							const selStart = this.start;
 							const selEnd = this.end;
@@ -414,7 +413,7 @@ export default Vue.extend({
 						},
 					},
 					{
-						name: Lang('table.cell.unmerge'),
+						name: this.$t('table.cell.unmerge'),
 						func: () => {
 							const selStart = this.start;
 							const selEnd = this.end;
@@ -464,7 +463,7 @@ export default Vue.extend({
 				],
 				[
 					{
-						name: Lang('table.remove'),
+						name: this.$t('table.remove'),
 						func: () => {
 							this.view = false;
 						},
