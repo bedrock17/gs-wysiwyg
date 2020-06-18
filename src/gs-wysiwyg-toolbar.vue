@@ -1,7 +1,7 @@
 <template>
 	<!-- S:New Editor Toolbar -->
 	<div>
-		<v-toolbar class="gs-custom" dense>
+		<v-toolbar :elevation="elevation" class="gs-custom" dense>
 			<!-- S:Work Flow -->
 			<v-divider vertical></v-divider>
 			<v-tooltip bottom>
@@ -47,7 +47,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('left')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('left')">
 							<v-icon>mdi-format-align-left</v-icon>
 						</v-btn>
 					</template>
@@ -55,7 +55,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('center')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('center')">
 							<v-icon>mdi-format-align-center</v-icon>
 						</v-btn>
 					</template>
@@ -63,7 +63,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('right')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('right')">
 							<v-icon>mdi-format-align-right</v-icon>
 						</v-btn>
 					</template>
@@ -71,7 +71,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('justify')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('justify')">
 							<v-icon>mdi-format-align-justify</v-icon>
 						</v-btn>
 					</template>
@@ -86,7 +86,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile class="d-md-none pa-0 mx-0" @click="textBarToggle" active-class="white" v-on="on">
+						<v-btn icon tile class="d-md-none pa-0 ma-0" @click="textBarToggle" active-class="white" v-on="on">
 							<v-icon>mdi-format-title</v-icon>
 						</v-btn>
 					</template>
@@ -195,6 +195,7 @@
 			<div class="d-none d-md-flex pa-0">
 				<v-divider vertical></v-divider>
 				<v-overflow-btn
+					flat
 					depressed
 					label="Code"
 					hide-details
@@ -250,7 +251,7 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleBold">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
@@ -258,7 +259,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleItalic">
 							<v-icon>mdi-format-italic</v-icon>
 						</v-btn>
 					</template>
@@ -266,7 +267,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleUnderline">
 							<v-icon>mdi-format-underline</v-icon>
 						</v-btn>
 					</template>
@@ -274,7 +275,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleStrike">
 							<v-icon>mdi-format-strikethrough-variant</v-icon>
 						</v-btn>
 					</template>
@@ -290,7 +291,7 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSub">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSub">
 							<v-icon>mdi-format-subscript</v-icon>
 						</v-btn>
 					</template>
@@ -298,7 +299,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSuper">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSuper">
 							<v-icon>mdi-format-superscript</v-icon>
 						</v-btn>
 					</template>
@@ -326,7 +327,7 @@
 			</div>
 			<!-- E:Text Format -->
 		</v-toolbar>
-		<v-toolbar id="toolbar-2" class="custom-toolbar d-none d-md-flex d-lg-none" dense>
+		<v-toolbar id="toolbar-2" :elevation="elevation" class="custom-toolbar d-none d-md-flex d-lg-none" dense>
 			<!-- S:Text Align -->
 			<v-btn-toggle
 				v-model="toggle.align"
@@ -336,7 +337,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('left')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('left')">
 							<v-icon>mdi-format-align-left</v-icon>
 						</v-btn>
 					</template>
@@ -344,7 +345,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('center')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('center')">
 							<v-icon>mdi-format-align-center</v-icon>
 						</v-btn>
 					</template>
@@ -352,7 +353,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('right')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('right')">
 							<v-icon>mdi-format-align-right</v-icon>
 						</v-btn>
 					</template>
@@ -360,7 +361,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('justify')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('justify')">
 							<v-icon>mdi-format-align-justify</v-icon>
 						</v-btn>
 					</template>
@@ -438,7 +439,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn v-model="toggle.bold" icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold">
+						<v-btn v-model="toggle.bold" icon tile v-on="on" class="pa-0 ma-0" @click="toggleBold">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
@@ -446,7 +447,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn v-model="toggle.italic" icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
+						<v-btn v-model="toggle.italic" icon tile v-on="on" class="pa-0 ma-0" @click="toggleItalic">
 							<v-icon>mdi-format-italic</v-icon>
 						</v-btn>
 					</template>
@@ -454,7 +455,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn v-model="toggle.underline" icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
+						<v-btn v-model="toggle.underline" icon tile v-on="on" class="pa-0 ma-0" @click="toggleUnderline">
 							<v-icon>mdi-format-underline</v-icon>
 						</v-btn>
 					</template>
@@ -462,7 +463,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn v-model="toggle.strike" icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
+						<v-btn v-model="toggle.strike" icon tile v-on="on" class="pa-0 ma-0" @click="toggleStrike">
 							<v-icon>mdi-format-strikethrough-variant</v-icon>
 						</v-btn>
 					</template>
@@ -478,7 +479,7 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSub">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSub">
 							<v-icon>mdi-format-subscript</v-icon>
 						</v-btn>
 					</template>
@@ -486,7 +487,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSuper">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSuper">
 							<v-icon>mdi-format-superscript</v-icon>
 						</v-btn>
 					</template>
@@ -512,7 +513,7 @@
 			</v-tooltip>
 			<!-- E:Text Format -->
 		</v-toolbar>
-		<v-toolbar id="toolbar-text" class="custom-toolbar d-md-none" v-if="toggle.textBar" dense>
+		<v-toolbar id="toolbar-text" :elevation="elevation" class="custom-toolbar d-md-none" v-if="toggle.textBar" dense>
 			<v-divider vertical></v-divider>
 			<!-- S:Text Color -->
 			<v-menu 
@@ -630,7 +631,7 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold(); return false">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleBold(); return false">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
@@ -638,7 +639,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleItalic">
 							<v-icon>mdi-format-italic</v-icon>
 						</v-btn>
 					</template>
@@ -646,7 +647,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleUnderline">
 							<v-icon>mdi-format-underline</v-icon>
 						</v-btn>
 					</template>
@@ -654,7 +655,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleStrike">
 							<v-icon>mdi-format-strikethrough-variant</v-icon>
 						</v-btn>
 					</template>
@@ -670,7 +671,7 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSub">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSub">
 							<v-icon>mdi-format-subscript</v-icon>
 						</v-btn>
 					</template>
@@ -678,7 +679,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSuper">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSuper">
 							<v-icon>mdi-format-superscript</v-icon>
 						</v-btn>
 					</template>
@@ -712,6 +713,12 @@
 	.v-overflow-btn
 	.v-select__selections {
 	width: auto !important;
+}
+
+.gs-custom
+	.v-overflow-btn
+	.v-input__slot {
+	border: none;
 }
 
 .gs-custom
@@ -949,6 +956,8 @@ export default Vue.extend({
 			bColorView1: false,
 			bColorView2: false,
 		},
+
+		elevation: 0,
 	}),
 });
 </script>

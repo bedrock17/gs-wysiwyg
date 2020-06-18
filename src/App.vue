@@ -1,8 +1,10 @@
 <template>
 	<v-app>
 		<v-content>
-			<GSToolbar/>
-			<br><hr><br>
+			<v-card :elevation="3">
+				<GSToolbar/>
+			</v-card>
+			<br><br><br>
 			<GSEditor ref="GSEditor" v-model="htmlText"/>
 
 			{{ htmlText }}
