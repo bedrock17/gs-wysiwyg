@@ -6,7 +6,7 @@
 		@keydown="updateEditerToolbar"
 		@keypress="updateEditerToolbar">
 		</div>
-		<Table/>
+        <!-- <Table/> -->
 	</div>
 </template>
 
@@ -20,13 +20,13 @@
 import Vue from 'vue';
 import ICC from './icc';
 import {GSEditor} from './editor_script/gseditor';
-import Table from './utils/table.vue';
+//import Table from './utils/table.vue';
 import Component from 'vue-class-component';
 
 // @Component 데코레이터는 클래스가 Vue 컴포넌트임을 나타냅니다.
 @Component({
 	components: {
-		Table,
+		//Table,
 	},
 })
 export default class EditorComponent extends Vue {
