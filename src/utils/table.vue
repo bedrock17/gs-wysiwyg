@@ -29,18 +29,24 @@ import Vue from 'vue';
 import { VueGoodTable } from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css';
 
+interface VgtColumn {
+	label: string;
+	field: string;
+	filterable?: true;
+}
+
 export default Vue.extend({
 	name: 'GsTable',
 	components: {
 		VueGoodTable,
 	},
 	methods: {
-		headerSync(evt: Event, column: any) {
+		headerSync(evt: Event, column: VgtColumn) {
 			const target: HTMLElement = evt.target as HTMLElement;
 			column.label = target.innerText;
 		},
-		showContextMenu(evt: Event) {
-			console.log(evt);
+		showContextMenu(evt: MouseEvent) {
+			// empty
 		},
 	},
 	// tslint:disable-next-line
