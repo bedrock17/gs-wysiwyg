@@ -8513,6 +8513,9 @@ var script$4 = {
       }
 
       return styleObject;
+    },
+    onContextMenu: function onContextMenu(column, colIndex, event) {
+      this.$emit('on-header-context', null, column, -1, colIndex, event);
     }
   },
   mounted: function mounted() {
@@ -8560,6 +8563,9 @@ var __vue_render__$4 = function __vue_render__() {
       on: {
         "click": function click($event) {
           return _vm.sort($event, column);
+        },
+        "contextmenu": function contextmenu($event) {
+          return _vm.onContextMenu(column, index, $event);
         }
       }
     }, [_vm._t("table-column", [_c('span', [_vm._v(_vm._s(column.label))])], {
@@ -8588,7 +8594,7 @@ var __vue_staticRenderFns__$4 = [];
 var __vue_inject_styles__$4 = undefined;
 /* scoped */
 
-var __vue_scope_id__$4 = "data-v-eb5a915e";
+var __vue_scope_id__$4 = "data-v-a6e33f08";
 /* module identifier */
 
 var __vue_module_identifier__$4 = undefined;
@@ -14245,6 +14251,15 @@ var script$6 = {
         event: event
       });
     },
+    onCellContextMenu: function onCellContextMenu(row, column, rowIndex, colIndex, event) {
+      this.$emit('on-cell-context', {
+        row: row,
+        column: column,
+        rowIndex: rowIndex,
+        colIndex: colIndex,
+        event: event
+      });
+    },
     onMouseenter: function onMouseenter(row, index) {
       this.$emit('on-row-mouseenter', {
         row: row,
@@ -14727,7 +14742,7 @@ var __vue_render__$6 = function __vue_render__() {
     staticClass: "vgt-loading vgt-center-align"
   }, [_vm._t("loadingContent", [_c('span', {
     staticClass: "vgt-loading__content"
-  }, [_vm._v("\n        Loading...\n      ")])])], 2) : _vm._e(), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n          Loading...\n        ")])])], 2) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "vgt-inner-wrap",
     class: {
       'is-loading': _vm.isLoading
@@ -14777,7 +14792,7 @@ var __vue_render__$6 = function __vue_render__() {
   }, [_vm._t("table-actions")], 2)], 2), _vm._v(" "), _vm.selectedRowCount && !_vm.disableSelectInfo ? _c('div', {
     staticClass: "vgt-selection-info-row clearfix",
     class: _vm.selectionInfoClass
-  }, [_vm._v("\n      " + _vm._s(_vm.selectionInfo) + "\n      "), _c('a', {
+  }, [_vm._v("\n        " + _vm._s(_vm.selectionInfo) + "\n        "), _c('a', {
     attrs: {
       "href": ""
     },
@@ -14787,7 +14802,7 @@ var __vue_render__$6 = function __vue_render__() {
         return _vm.unselectAllInternal(true);
       }
     }
-  }, [_vm._v("\n        " + _vm._s(_vm.clearSelectionText) + "\n      ")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("\n          " + _vm._s(_vm.clearSelectionText) + "\n        ")]), _vm._v(" "), _c('div', {
     staticClass: "vgt-selection-info-row__actions vgt-pull-right"
   }, [_vm._t("selected-row-actions")], 2)]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "vgt-fixed-header"
@@ -14813,7 +14828,8 @@ var __vue_render__$6 = function __vue_render__() {
     on: {
       "on-toggle-select-all": _vm.toggleSelectAll,
       "on-sort-change": _vm.changeSort,
-      "filter-changed": _vm.filterRows
+      "filter-changed": _vm.filterRows,
+      "on-header-context": _vm.onCellContextMenu
     },
     scopedSlots: _vm._u([{
       key: "table-column",
@@ -14849,7 +14865,8 @@ var __vue_render__$6 = function __vue_render__() {
     on: {
       "on-toggle-select-all": _vm.toggleSelectAll,
       "on-sort-change": _vm.changeSort,
-      "filter-changed": _vm.filterRows
+      "filter-changed": _vm.filterRows,
+      "on-header-context": _vm.onCellContextMenu
     },
     scopedSlots: _vm._u([{
       key: "table-column",
@@ -14913,7 +14930,7 @@ var __vue_render__$6 = function __vue_render__() {
         }
       }, [_vm.lineNumbers ? _c('th', {
         staticClass: "line-numbers"
-      }, [_vm._v("\n              " + _vm._s(_vm.getCurrentIndex(index)) + "\n            ")]) : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th', {
+      }, [_vm._v("\n                " + _vm._s(_vm.getCurrentIndex(index)) + "\n              ")]) : _vm._e(), _vm._v(" "), _vm.selectable ? _c('th', {
         staticClass: "vgt-checkbox-col",
         on: {
           "click": function click($event) {
@@ -14935,9 +14952,12 @@ var __vue_render__$6 = function __vue_render__() {
           on: {
             "click": function click($event) {
               return _vm.onCellClicked(row, column, index, $event);
+            },
+            "contextmenu": function contextmenu($event) {
+              return _vm.onCellContextMenu(row, column, index, i, $event);
             }
           }
-        }, [_vm._t("table-row", [!column.html ? _c('span', [_vm._v("\n                  " + _vm._s(_vm.collectFormatted(row, column)) + "\n                ")]) : _vm._e(), _vm._v(" "), column.html ? _c('span', {
+        }, [_vm._t("table-row", [!column.html ? _c('span', [_vm._v("\n                    " + _vm._s(_vm.collectFormatted(row, column)) + "\n                  ")]) : _vm._e(), _vm._v(" "), column.html ? _c('span', {
           domProps: {
             "innerHTML": _vm._s(_vm.collect(row, column.field))
           }
@@ -14976,7 +14996,7 @@ var __vue_render__$6 = function __vue_render__() {
     }
   }, [_vm._t("emptystate", [_c('div', {
     staticClass: "vgt-center-align vgt-text-disabled"
-  }, [_vm._v("\n                  No data for table\n                ")])])], 2)])]) : _vm._e()], 2)]), _vm._v(" "), _vm.hasFooterSlot ? _c('div', {
+  }, [_vm._v("\n                    No data for table\n                  ")])])], 2)])]) : _vm._e()], 2)]), _vm._v(" "), _vm.hasFooterSlot ? _c('div', {
     staticClass: "vgt-wrap__actions-footer"
   }, [_vm._t("table-actions-bottom")], 2) : _vm._e(), _vm._v(" "), _vm.paginate && _vm.paginateOnBottom ? _vm._t("pagination-bottom", [_c('vgt-pagination', {
     ref: "paginationBottom",

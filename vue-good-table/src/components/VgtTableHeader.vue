@@ -14,6 +14,7 @@
       @click="sort($event, column)"
       :class="getHeaderClasses(column, index)"
       :style="columnStyles[index]"
+	  @contextmenu="onContextMenu(column, index, $event)"
       v-if="!column.hidden">
       <slot name="table-column" :column="column">
         <span>{{column.label}}</span>
@@ -226,6 +227,10 @@ export default {
       }
       return styleObject;
     },
+	
+	onContextMenu(column, colIndex, event) {
+	  this.$emit('on-header-context', null, column, -1, colIndex, event);
+	},
   },
   mounted() {
     window.addEventListener('resize', this.setColumnStyles);

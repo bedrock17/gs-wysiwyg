@@ -76,6 +76,7 @@
             @on-toggle-select-all="toggleSelectAll"
             @on-sort-change="changeSort"
             @filter-changed="filterRows"
+			@on-header-context="onCellContextMenu"
             :columns="columns"
             :line-numbers="lineNumbers"
             :selectable="selectable"
@@ -118,6 +119,7 @@
             @on-toggle-select-all="toggleSelectAll"
             @on-sort-change="changeSort"
             @filter-changed="filterRows"
+			@on-header-context="onCellContextMenu"
             :columns="columns"
             :line-numbers="lineNumbers"
             :selectable="selectable"
@@ -208,6 +210,7 @@
                 v-for="(column, i) in columns"
                 :key="i"
                 :class="getClasses(i, 'td', row)"
+				@contextmenu="onCellContextMenu(row, column, index, i, $event)"
                 v-if="!column.hidden && column.field"
               >
                 <slot
@@ -1116,6 +1119,16 @@ export default {
         row,
         column,
         rowIndex,
+        event,
+      });
+    },
+
+    onCellContextMenu(row, column, rowIndex, colIndex, event) {
+      this.$emit('on-cell-context', {
+        row,
+        column,
+        rowIndex,
+		colIndex,
         event,
       });
     },

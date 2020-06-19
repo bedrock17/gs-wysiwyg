@@ -16,6 +16,7 @@
       @on-per-page-change="onPerPageChange"
       @on-search="onSearch"
       @on-selected-rows-change="onSelectChanged"
+	  @on-cell-context="onCellContext"
       :columns="columns"
       :rows="rows"
       :pagination-options="paginationOptions"
@@ -435,6 +436,10 @@ export default {
       console.log(params.selectedRows);
       console.log(selectedIds);
       this.selectedIds = selectedIds;
+    },
+
+    onCellContext(params) {
+      console.log(params);
     },
   },
   mounted() {

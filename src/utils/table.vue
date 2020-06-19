@@ -4,15 +4,15 @@
 			class="gs-table-custom"
 			:columns="cols"
 			:sort-options="{ enabled: false }"
-			@contextmenu="showContextMenu"
+			@on-cell-context="showContextMenu"
 			:rows="rows">
-			<template slot="table-column" slot-scope="props">
+			<template slot="table-column" slot-scope="props" @contextmenu="iii">
 				<div contenteditable style="outline: none;" @input="headerSync($event, props.column)">
 					test
 				</div>
 			</template>
 			<template slot="table-row" slot-scope="props">
-				<div contenteditable style="outline: none;">
+				<div contenteditable style="outline: none;" @input="iii(props)">
 					{{ props.formattedRow[props.column.field] }}
 				</div>
 			</template>
@@ -47,7 +47,11 @@ export default Vue.extend({
 		},
 		showContextMenu(evt: MouseEvent) {
 			// empty
+			console.log(evt);
 		},
+		iii(props: any) {
+			console.log(props);
+		}
 	},
 	// tslint:disable-next-line
 	data() {
@@ -55,9 +59,10 @@ export default Vue.extend({
 			view: true,
 			cols: [
 				{ label: 'Header', field: 'field-1' },
+				{ label: 'Two', field: 'field-2' },
 			],
 			rows: [
-				{ 'id': 1, 'field-1': 'Hello?' },
+				{ 'id': 1, 'field-1': 'Hello?', 'field-2': 'World!' },
 			],
 		};
 	},
