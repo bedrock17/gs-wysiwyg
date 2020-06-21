@@ -1,7 +1,7 @@
 <template>
 	<!-- S:New Editor Toolbar -->
 	<div>
-		<v-toolbar class="gs-custom" dense>
+		<v-toolbar :elevation="elevation" class="gs-custom" dense>
 			<!-- S:Work Flow -->
 			<v-divider vertical></v-divider>
 			<v-tooltip bottom>
@@ -10,7 +10,7 @@
 						<v-icon>mdi-eraser</v-icon>
 					</v-btn>
 				</template>
-				<span>{{ Lang('editor.toolbar.erase') }}</span>
+				<span>{{ $t('editor.toolbar.erase') }}</span>
 			</v-tooltip>
 			<v-tooltip bottom>
 				<template v-slot:activator="{ on }">
@@ -18,7 +18,7 @@
 						<v-icon>mdi-undo</v-icon>
 					</v-btn>
 				</template>
-				<span>{{ Lang('editor.toolbar.undo') }}</span>
+				<span>{{ $t('editor.toolbar.undo') }}</span>
 			</v-tooltip>
 			<v-tooltip bottom>
 				<template v-slot:activator="{ on }">
@@ -26,7 +26,7 @@
 						<v-icon>mdi-redo</v-icon>
 					</v-btn>
 				</template>
-				<span>{{ Lang('editor.toolbar.redo') }}</span>
+				<span>{{ $t('editor.toolbar.redo') }}</span>
 			</v-tooltip>
 			<!-- E:Work Flow -->
 			<v-divider vertical></v-divider>
@@ -37,7 +37,7 @@
 						<v-icon v-text="'mdi-format-align-' + align[toggle.align]"></v-icon>
 					</v-btn>
 				</template>
-				<span v-text="Lang('editor.toolbar.align-' + align[toggle.align])"></span>
+				<span v-text="$t('editor.toolbar.align-' + align[toggle.align])"></span>
 			</v-tooltip>
 			<v-btn-toggle
 				v-model="toggle.align"
@@ -47,35 +47,35 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('left')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('left')">
 							<v-icon>mdi-format-align-left</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.align-left') }}</span>
+					<span>{{ $t('editor.toolbar.align-left') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('center')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('center')">
 							<v-icon>mdi-format-align-center</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.align-center') }}</span>
+					<span>{{ $t('editor.toolbar.align-center') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('right')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('right')">
 							<v-icon>mdi-format-align-right</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.align-right') }}</span>
+					<span>{{ $t('editor.toolbar.align-right') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('justify')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('justify')">
 							<v-icon>mdi-format-align-justify</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.align-justify') }}</span>
+					<span>{{ $t('editor.toolbar.align-justify') }}</span>
 				</v-tooltip>
 			</v-btn-toggle>
 			<!-- E:Text Align -->
@@ -86,11 +86,11 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile class="d-md-none pa-0 mx-0" @click="textBarToggle" active-class="white" v-on="on">
+						<v-btn icon tile class="d-md-none pa-0 ma-0" @click="textBarToggle" active-class="white" v-on="on">
 							<v-icon>mdi-format-title</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.text-menu') }}</span>
+					<span>{{ $t('editor.toolbar.text-menu') }}</span>
 				</v-tooltip>
 			</v-btn-toggle>
 			<!-- S:Text Color -->
@@ -111,7 +111,7 @@
 									<v-icon>mdi-format-color-text</v-icon>
 								</v-btn>
 							</template>
-							<span>{{ Lang('editor.toolbar.text-color') }}</span>
+							<span>{{ $t('editor.toolbar.text-color') }}</span>
 						</v-tooltip>
 					</template>
 					<v-color-picker
@@ -121,7 +121,7 @@
 						mode="hexa"
 						show-swatches></v-color-picker>
 					<v-card tile color="white" align="right">
-						<v-btn text color="grey darken-1" @click="toggle.tColorView0=false; textFrontColorChange();" tile>{{ Lang('apply') }}</v-btn>
+						<v-btn text color="grey darken-1" @click="toggle.tColorView0=false; textFrontColorChange();" tile>{{ $t('apply') }}</v-btn>
 					</v-card>
 				</v-menu>
 				<v-menu 
@@ -145,11 +145,11 @@
 									<v-icon>mdi-format-color-fill</v-icon>
 								</v-btn>
 							</template>
-							<span>{{ Lang('editor.toolbar.bg-color') }}</span>
+							<span>{{ $t('editor.toolbar.bg-color') }}</span>
 						</v-tooltip>
 					</template>
 					<v-card tile color="white" align="right">
-						<v-btn text color="grey darken-1" @click="toggle.bColorView0=false; textBackColorChange();" tile>{{ Lang('apply') }}</v-btn>
+						<v-btn text color="grey darken-1" @click="toggle.bColorView0=false; textBackColorChange();" tile>{{ $t('apply') }}</v-btn>
 					</v-card>
 				</v-menu>
 			</div>
@@ -163,7 +163,7 @@
 							<v-icon>mdi-image-multiple</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.picture') }}</span>
+					<span>{{ $t('editor.toolbar.picture') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
@@ -171,7 +171,7 @@
 							<v-icon>mdi-table-large-plus</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.table') }}</span>
+					<span>{{ $t('editor.toolbar.table') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
@@ -179,15 +179,15 @@
 							<v-icon>mdi-xml</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.source') }}</span>
+					<span>{{ $t('editor.toolbar.source') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
 						<v-btn icon tile v-on="on" @click="viewMarkDown">
-							<v-icon>mdi-markdown</v-icon>
+							<v-icon>mdi-language-markdown</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.markdown') }}</span>
+					<span>{{ $t('editor.toolbar.markdown') }}</span>
 				</v-tooltip>
 			</div>
 			<!-- E:Utility -->
@@ -195,6 +195,7 @@
 			<div class="d-none d-md-flex pa-0">
 				<v-divider vertical></v-divider>
 				<v-overflow-btn
+					flat
 					depressed
 					label="Code"
 					hide-details
@@ -250,35 +251,35 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleBold">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.bold') }}</span>
+					<span>{{ $t('editor.toolbar.bold') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleItalic">
 							<v-icon>mdi-format-italic</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.italic') }}</span>
+					<span>{{ $t('editor.toolbar.italic') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleUnderline">
 							<v-icon>mdi-format-underline</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.underline') }}</span>
+					<span>{{ $t('editor.toolbar.underline') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleStrike">
 							<v-icon>mdi-format-strikethrough-variant</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.strike') }}</span>
+					<span>{{ $t('editor.toolbar.strike') }}</span>
 				</v-tooltip>
 			</v-btn-toggle>
 			<v-btn-toggle 
@@ -290,19 +291,19 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSub">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSub">
 							<v-icon>mdi-format-subscript</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.sub') }}</span>
+					<span>{{ $t('editor.toolbar.sub') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSuper">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSuper">
 							<v-icon>mdi-format-superscript</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.super') }}</span>
+					<span>{{ $t('editor.toolbar.super') }}</span>
 				</v-tooltip>
 			</v-btn-toggle>
 			<div class="d-none d-lg-flex pa-0">
@@ -313,7 +314,7 @@
 							<v-icon>mdi-link-variant-plus</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.link') }}</span>
+					<span>{{ $t('editor.toolbar.link') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
@@ -321,12 +322,12 @@
 							<v-icon>mdi-link-variant-minus</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.unlink') }}</span>
+					<span>{{ $t('editor.toolbar.unlink') }}</span>
 				</v-tooltip>
 			</div>
 			<!-- E:Text Format -->
 		</v-toolbar>
-		<v-toolbar id="toolbar-2" class="custom-toolbar d-none d-md-flex d-lg-none" dense>
+		<v-toolbar id="toolbar-2" :elevation="elevation" class="custom-toolbar d-none d-md-flex d-lg-none" dense>
 			<!-- S:Text Align -->
 			<v-btn-toggle
 				v-model="toggle.align"
@@ -336,35 +337,35 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('left')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('left')">
 							<v-icon>mdi-format-align-left</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.align-left') }}</span>
+					<span>{{ $t('editor.toolbar.align-left') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('center')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('center')">
 							<v-icon>mdi-format-align-center</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.align-center') }}</span>
+					<span>{{ $t('editor.toolbar.align-center') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('right')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('right')">
 							<v-icon>mdi-format-align-right</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.align-right') }}</span>
+					<span>{{ $t('editor.toolbar.align-right') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="changeAlign('justify')">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="changeAlign('justify')">
 							<v-icon>mdi-format-align-justify</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.align-justify') }}</span>
+					<span>{{ $t('editor.toolbar.align-justify') }}</span>
 				</v-tooltip>
 			</v-btn-toggle>
 			<!-- E:Text Align -->
@@ -385,7 +386,7 @@
 									<v-icon>mdi-format-color-text</v-icon>
 								</v-btn>
 							</template>
-							<span>{{ Lang('editor.toolbar.text-color') }}</span>
+							<span>{{ $t('editor.toolbar.text-color') }}</span>
 						</v-tooltip>
 					</template>
 					<v-color-picker 
@@ -395,7 +396,7 @@
 						mode="hexa"
 						show-swatches></v-color-picker>
 					<v-card tile color="white" align="right">
-						<v-btn text color="grey darken-1" @click="toggle.tColorView1=false; textFrontColorChange();" tile>{{ Lang('apply') }}</v-btn>
+						<v-btn text color="grey darken-1" @click="toggle.tColorView1=false; textFrontColorChange();" tile>{{ $t('apply') }}</v-btn>
 					</v-card>
 				</v-menu>
 				<v-menu 
@@ -419,11 +420,11 @@
 									<v-icon>mdi-format-color-fill</v-icon>
 								</v-btn>
 							</template>
-							<span>{{ Lang('editor.toolbar.bg-color') }}</span>
+							<span>{{ $t('editor.toolbar.bg-color') }}</span>
 						</v-tooltip>
 					</template>
 					<v-card tile color="white" align="right">
-						<v-btn text color="grey darken-1" @click="toggle.bColorView1=false; textBackColorChange();" tile>{{ Lang('apply') }}</v-btn>
+						<v-btn text color="grey darken-1" @click="toggle.bColorView1=false; textBackColorChange();" tile>{{ $t('apply') }}</v-btn>
 					</v-card>
 				</v-menu>
 			<!-- E:Text Color -->
@@ -438,35 +439,35 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn v-model="toggle.bold" icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold">
+						<v-btn v-model="toggle.bold" icon tile v-on="on" class="pa-0 ma-0" @click="toggleBold">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.bold') }}</span>
+					<span>{{ $t('editor.toolbar.bold') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn v-model="toggle.italic" icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
+						<v-btn v-model="toggle.italic" icon tile v-on="on" class="pa-0 ma-0" @click="toggleItalic">
 							<v-icon>mdi-format-italic</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.italic') }}</span>
+					<span>{{ $t('editor.toolbar.italic') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn v-model="toggle.underline" icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
+						<v-btn v-model="toggle.underline" icon tile v-on="on" class="pa-0 ma-0" @click="toggleUnderline">
 							<v-icon>mdi-format-underline</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.underline') }}</span>
+					<span>{{ $t('editor.toolbar.underline') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn v-model="toggle.strike" icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
+						<v-btn v-model="toggle.strike" icon tile v-on="on" class="pa-0 ma-0" @click="toggleStrike">
 							<v-icon>mdi-format-strikethrough-variant</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.strike') }}</span>
+					<span>{{ $t('editor.toolbar.strike') }}</span>
 				</v-tooltip>
 			</v-btn-toggle>
 			<v-btn-toggle 
@@ -478,19 +479,19 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSub">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSub">
 							<v-icon>mdi-format-subscript</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.sub') }}</span>
+					<span>{{ $t('editor.toolbar.sub') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSuper">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSuper">
 							<v-icon>mdi-format-superscript</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.super') }}</span>
+					<span>{{ $t('editor.toolbar.super') }}</span>
 				</v-tooltip>
 			</v-btn-toggle>
 			<v-divider vertical></v-divider>
@@ -500,7 +501,7 @@
 						<v-icon>mdi-link-variant-plus</v-icon>
 					</v-btn>
 				</template>
-				<span>{{ Lang('editor.toolbar.link') }}</span>
+				<span>{{ $t('editor.toolbar.link') }}</span>
 			</v-tooltip>
 			<v-tooltip bottom>
 				<template v-slot:activator="{ on }">
@@ -508,11 +509,11 @@
 						<v-icon>mdi-link-variant-minus</v-icon>
 					</v-btn>
 				</template>
-				<span>{{ Lang('editor.toolbar.unlink') }}</span>
+				<span>{{ $t('editor.toolbar.unlink') }}</span>
 			</v-tooltip>
 			<!-- E:Text Format -->
 		</v-toolbar>
-		<v-toolbar id="toolbar-text" class="custom-toolbar d-md-none" v-if="toggle.textBar" dense>
+		<v-toolbar id="toolbar-text" :elevation="elevation" class="custom-toolbar d-md-none" v-if="toggle.textBar" dense>
 			<v-divider vertical></v-divider>
 			<!-- S:Text Color -->
 			<v-menu 
@@ -530,7 +531,7 @@
 								<v-icon>mdi-format-color-text</v-icon>
 							</v-btn>
 						</template>
-						<span>{{ Lang('editor.toolbar.text-color') }}</span>
+						<span>{{ $t('editor.toolbar.text-color') }}</span>
 					</v-tooltip>
 				</template>
 				<v-color-picker 
@@ -540,7 +541,7 @@
 					mode="hexa"
 					show-swatches></v-color-picker>
 				<v-card tile color="white" align="right">
-					<v-btn text color="grey darken-1" @click="toggle.tColorView2=false; textFrontColorChange();" tile>{{ Lang('apply') }}</v-btn>
+					<v-btn text color="grey darken-1" @click="toggle.tColorView2=false; textFrontColorChange();" tile>{{ $t('apply') }}</v-btn>
 				</v-card>
 			</v-menu>
 			<v-menu 
@@ -564,11 +565,11 @@
 								<v-icon>mdi-format-color-fill</v-icon>
 							</v-btn>
 						</template>
-						<span>{{ Lang('editor.toolbar.bg-color') }}</span>
+						<span>{{ $t('editor.toolbar.bg-color') }}</span>
 					</v-tooltip>
 				</template>
 				<v-card tile color="white" align="right">
-					<v-btn text color="grey darken-1" @click="toggle.bColorView2=false; textBackColorChange();" tile>{{ Lang('apply') }}</v-btn>
+					<v-btn text color="grey darken-1" @click="toggle.bColorView2=false; textBackColorChange();" tile>{{ $t('apply') }}</v-btn>
 				</v-card>
 			</v-menu>
 			<!-- S:Text Color -->
@@ -630,35 +631,35 @@
 				madatory>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleBold(); return false">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleBold(); return false">
 							<v-icon>mdi-format-bold</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.bold') }}</span>
+					<span>{{ $t('editor.toolbar.bold') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleItalic">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleItalic">
 							<v-icon>mdi-format-italic</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.italic') }}</span>
+					<span>{{ $t('editor.toolbar.italic') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleUnderline">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleUnderline">
 							<v-icon>mdi-format-underline</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.underline') }}</span>
+					<span>{{ $t('editor.toolbar.underline') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleStrike">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleStrike">
 							<v-icon>mdi-format-strikethrough-variant</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.strike') }}</span>
+					<span>{{ $t('editor.toolbar.strike') }}</span>
 				</v-tooltip>
 			</v-btn-toggle>
 			<v-btn-toggle 
@@ -670,19 +671,19 @@
 				<v-divider vertical></v-divider>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSub">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSub">
 							<v-icon>mdi-format-subscript</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.sub') }}</span>
+					<span>{{ $t('editor.toolbar.sub') }}</span>
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" class="pa-0 mx-0" @click="toggleSuper">
+						<v-btn icon tile v-on="on" class="pa-0 ma-0" @click="toggleSuper">
 							<v-icon>mdi-format-superscript</v-icon>
 						</v-btn>
 					</template>
-					<span>{{ Lang('editor.toolbar.super') }}</span>
+					<span>{{ $t('editor.toolbar.super') }}</span>
 				</v-tooltip>
 			</v-btn-toggle>
 			<v-divider vertical></v-divider>
@@ -692,7 +693,7 @@
 						<v-icon>mdi-link-variant-plus</v-icon>
 					</v-btn>
 				</template>
-				<span>{{ Lang('editor.toolbar.link') }}</span>
+				<span>{{ $t('editor.toolbar.link') }}</span>
 			</v-tooltip>
 			<v-tooltip bottom>
 				<template v-slot:activator="{ on }">
@@ -700,7 +701,7 @@
 						<v-icon>mdi-link-variant-minus</v-icon>
 					</v-btn>
 				</template>
-				<span>{{ Lang('editor.toolbar.unlink') }}</span>
+				<span>{{ $t('editor.toolbar.unlink') }}</span>
 			</v-tooltip>
 			<!-- E:Text Format -->
 		</v-toolbar>
@@ -715,13 +716,18 @@
 }
 
 .gs-custom
+	.v-overflow-btn
+	.v-input__slot {
+	border: none;
+}
+
+.gs-custom
 	.v-toolbar__content {
 	padding: 0 !important;
 }
 </style>
 <script lang="ts">
 import Vue from 'vue';
-import Lang from './languages/Lang.js';
 import ICC from './icc';
 
 const EmitICC = (method: string, ...args: any[]) => {
@@ -734,7 +740,6 @@ export default Vue.extend({
 	name: 'Toolbar',
 
 	methods: {
-		Lang,
 
 		/* S:Work Flow */
 		erase() {
@@ -951,6 +956,8 @@ export default Vue.extend({
 			bColorView1: false,
 			bColorView2: false,
 		},
+
+		elevation: 0,
 	}),
 });
 </script>
