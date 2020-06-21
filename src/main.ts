@@ -2,7 +2,8 @@ import Vue from 'vue';
 import App from './App.vue';
 import vuetify from './plugins/vuetify';
 
-import '@/plugins/mixin';
+import GlobalMixin from '@/plugins/mixin';
+Vue.mixin(GlobalMixin);
 
 Vue.config.productionTip = false;
 

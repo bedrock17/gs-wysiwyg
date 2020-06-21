@@ -37,13 +37,20 @@ export default class ContextList extends Vue {
 	private x: number = 0;
 	private y: number = 0;
 	private w: string = this.width;
-	private ctx: CtxListItem[][] = this.context;
+	private oriCtx: CtxListItem[][] = this.context;
+	private ctx: CtxListItem[][] = this.oriCtx;
 	private show: boolean = false;
 
-	public open(evt: MouseEvent): any {
+	public open(evt: MouseEvent, ctxList?: CtxListItem[][]): any {
 		this.x = evt.clientX;
 		this.y = evt.clientY;
 		this.show = true;
+
+		if ( ctxList ) {
+			this.ctx = ctxList;
+		} else {
+			this.ctx = this.oriCtx;
+		}
 		evt.preventDefault();
 	}
 }

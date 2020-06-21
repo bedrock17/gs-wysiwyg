@@ -6,7 +6,7 @@
 		@keydown="updateEditerToolbar"
 		@keypress="updateEditerToolbar">
 		</div>
-        <Table/>
+		<Table :editable="true"/>
 	</div>
 </template>
 
