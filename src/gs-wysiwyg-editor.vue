@@ -42,9 +42,8 @@ export default class EditorComponent extends Vue {
 	}
 
 	private updateEditerToolbar(): void {
-		// mouse up 이벤트가 발생했을 때 현재 선택된 부분을 파싱해서 ICC로 toolbar로 이벤트를 보낸다.
-		// FIXME: 실제로는 효과가 적용중인 영역이 있음 HTML 구조상
-		// 태그 영역이 아니라서 toolbar에는 비활성화 되는 문제 있음
+		// 현재 커서의 상태를 보고
+		// toolbar로 이벤트를 보낸다.
 		if (this.editor != null) {
 			this.editor.updateToolbar();
 		}

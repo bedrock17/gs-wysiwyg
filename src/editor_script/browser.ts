@@ -13,3 +13,8 @@ export const getRange = (): Range| null => {
 	}
 	return sel.getRangeAt(0);
 };
+
+export const getFontBoldState = (): string => {
+	return document.queryCommandValue('Bold');
+	// return document.queryCommandValue("ForeColor");
+};

@@ -5,13 +5,14 @@
 
 */
 
-import {getRange} from './browser';
+import {getRange, getFontBoldState} from './browser';
 import {Queue} from './queue';
 
 interface ParseState {
 	tagName: string;
 	value: boolean;
 	emitKey: string;
+	queryString: string;
 }
 
 export class GSEditor {
@@ -37,39 +38,22 @@ export class GSEditor {
 		}
 
 		const parseList: ParseState[] =  [
-			{ tagName: 'B', emitKey: 'cursor-bold', value: false },
-			{ tagName: 'STRIKE', emitKey: 'cursor-strike', value: false },
-			{ tagName: 'I', emitKey: 'cursor-italic', value: false },
-			{ tagName: 'U', emitKey: 'cursor-underline', value: false },
+			{ tagName: 'B', emitKey: 'cursor-bold', value: false, queryString: 'Bold'},
+			{ tagName: 'STRIKE', emitKey: 'cursor-strike', value: false, queryString: 'strikethrough'},
+			{ tagName: 'I', emitKey: 'cursor-italic', value: false, queryString: 'Italic'},
+			{ tagName: 'U', emitKey: 'cursor-underline', value: false, queryString: 'Underline'},
 			// { tagName: 'STRONG', emitKey: 'cursor-bold', value: false },
 		];
 
-		const q = new Queue();
-		q.enqueue(range.startContainer.parentElement);
 
-		while (q.length > 0) {
-			const element = q.dequeue();
+		for (const i of parseList) {
+			const qValue = document.queryCommandValue(i.queryString);
 
-			for (const i of parseList) {
-				if (i.tagName === element.tagName) {
-					i.value = true;
-				}
+			if (qValue === 'true') {
+				i.value = true;
 			}
-
-			if (element === this.editorDivTagElement) {
-				// 에디터 탐색이 끝난경우
-				break;
-			}
-			const parent = element.parentElement;
-			if (parent == null) {
-				// 타입상 예외처리, 일반적으로 실행될 상황은 없음
-				break;
-			}
-
-			q.enqueue(parent);
 		}
 
-		// ICC로 Toolbar를 업데이트 시켜줘야함
 		// TODO
 		// ICC로 보내주는 정보에 관한 문서 작성
 		// 색상 선택시 등..

@@ -227,7 +227,10 @@ export default Vue.extend({
 		tableDragOver,
 		tableDragEnd,
 		toggleContext,
-		log: console.log,
+		// log: console.log,
+		log: () => {
+			return;
+		},
 		tdInput(this: any, evt: Event) {
 			const target = evt.target as HTMLElement;
 			const row = target.dataset.row as string;
