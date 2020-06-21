@@ -30,11 +30,8 @@ import Component from 'vue-class-component';
 	},
 })
 export default class EditorComponent extends Vue {
-  // 초기 데이터는 인스턴스 속성으로 선언할 수 있습니다.
-  // private message: string = 'Hello!'
 	private editor: GSEditor | null = null;
 
-  // 컴포넌트 메소드는 인스턴스 메소드로 선언할 수 있습니다.
 	private handleInput(): void {
 		if (this.editor != null) {
 			this.$emit('input', this.editor.getHTML());

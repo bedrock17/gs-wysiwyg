@@ -107,7 +107,7 @@
 					<template v-slot:activator="{ on: menu }">
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on: tooltip }">
-								<v-btn icon tile v-on="{ ...tooltip, ...menu }">
+								<v-btn v-bind:style="{color: toolbarStatus.fColorView}" icon tile v-on="{ ...tooltip, ...menu }">
 									<v-icon>mdi-format-color-text</v-icon>
 								</v-btn>
 							</template>
@@ -382,7 +382,7 @@
 					<template v-slot:activator="{ on: menu }">
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on: tooltip }">
-								<v-btn icon tile v-on="{ ...tooltip, ...menu }">
+								<v-btn  v-bind:style="{color: toolbarStatus.fColorView}" icon tile v-on="{ ...tooltip, ...menu }">
 									<v-icon>mdi-format-color-text</v-icon>
 								</v-btn>
 							</template>
@@ -527,7 +527,7 @@
 				<template v-slot:activator="{ on: menu }">
 					<v-tooltip bottom>
 						<template v-slot:activator="{ on: tooltip }">
-							<v-btn icon tile v-on="{ ...tooltip, ...menu }">
+							<v-btn v-bind:style="{color: toolbarStatus.fColorView}" icon tile v-on="{ ...tooltip, ...menu }">
 								<v-icon>mdi-format-color-text</v-icon>
 							</v-btn>
 						</template>
@@ -897,20 +897,42 @@ export default Vue.extend({
 	},
 
 	mounted() {
-		ICC['editor-icc'].emit('editor-icc', 'Hello', 'World');
 
-		const EICC = ICC['editor-icc'];
-		EICC.on('cursor-bold', (active: boolean) => {
-			this.toggle.bold = active;
+		// 에디터 에서 보낸 메세지를 처리한다.
+		// ICC['toolbar-icc'].emit('toolbar-icc', 'Hello', 'World');
+
+		const EICC = ICC['toolbar-icc'];
+		EICC.on('cursor-bold', (active: string) => {
+			if (active === 'true') {
+				this.toggle.bold = true;
+			} else {
+				this.toggle.bold = false;
+			}
 		});
-		EICC.on('cursor-italic', (active: boolean) => {
-			this.toggle.italic = active;
+		EICC.on('cursor-italic', (active: string) => {
+			if (active === 'true') {
+				this.toggle.italic = true;
+			} else {
+				this.toggle.italic = false;
+			}
 		});
-		EICC.on('cursor-strike', (active: boolean) => {
-			this.toggle.strike = active;
+		EICC.on('cursor-strike', (active: string) => {
+			if (active === 'true') {
+				this.toggle.strike = true;
+			} else {
+				this.toggle.strike = false;
+			}
 		});
-		EICC.on('cursor-underline', (active: boolean) => {
-			this.toggle.underline = active;
+		EICC.on('cursor-underline', (active: string) => {
+			if (active === 'true') {
+				this.toggle.underline = true;
+			} else {
+				this.toggle.underline = false;
+			}
+		});
+
+		EICC.on('text-front-color-change', (colorCode: string) => {
+			this.toolbarStatus.fColorView = colorCode;
 		});
 	},
 
@@ -955,6 +977,10 @@ export default Vue.extend({
 			bColorView0: false,
 			bColorView1: false,
 			bColorView2: false,
+		},
+
+		toolbarStatus: {
+			fColorView: '#000',
 		},
 
 		elevation: 0,

@@ -9,8 +9,7 @@ import {getRange, getFontBoldState} from './browser';
 import {Queue} from './queue';
 
 interface ParseState {
-	tagName: string;
-	value: boolean;
+	value: string;
 	emitKey: string;
 	queryString: string;
 }
@@ -21,10 +20,18 @@ export class GSEditor {
 	private ICC: any;
 	// private lastKeyPos
 
+	private parseList: ParseState[] =  [
+		{ emitKey: 'cursor-bold', value: '', queryString: 'Bold'},
+		{ emitKey: 'cursor-strike', value: '', queryString: 'strikethrough'},
+		{ emitKey: 'cursor-italic', value: '', queryString: 'Italic'},
+		{ emitKey: 'cursor-underline', value: '', queryString: 'Underline'},
+		{ emitKey: 'text-front-color-change', value: '', queryString: 'foreColor'},
+	];
+
 	constructor(editorElement: any, icc: any) {
 		this.editorDivTagElement = editorElement;
 		this.ICC = icc;
-		this.init_icc();
+		this.initICC();
 	}
 
 	public getHTML(): string {
@@ -38,37 +45,25 @@ export class GSEditor {
 			return;
 		}
 
-		const parseList: ParseState[] =  [
-			{ tagName: 'B', emitKey: 'cursor-bold', value: false, queryString: 'Bold'},
-			{ tagName: 'STRIKE', emitKey: 'cursor-strike', value: false, queryString: 'strikethrough'},
-			{ tagName: 'I', emitKey: 'cursor-italic', value: false, queryString: 'Italic'},
-			{ tagName: 'U', emitKey: 'cursor-underline', value: false, queryString: 'Underline'},
-			// { tagName: 'STRONG', emitKey: 'cursor-bold', value: false },
-		];
+		for (const i of this.parseList) {
+			const value = document.queryCommandValue(i.queryString);
 
-
-		for (const i of parseList) {
-			const qValue = document.queryCommandValue(i.queryString);
-
-			if (qValue === 'true') {
-				i.value = true;
+			// TODO
+			// ICC로 보내주는 정보에 관한 문서 작성
+			// 색상 선택시 등..
+			if (i.value !== value) { //이전 정보와 다를 때만 툴바를 업데이트 한다.
+				i.value = value;
+				this.EmitICC(i.emitKey, i.value);
 			}
-		}
-
-		// TODO
-		// ICC로 보내주는 정보에 관한 문서 작성
-		// 색상 선택시 등..
-		for (const i of parseList) {
-			this.EmitICC(i.emitKey, i.value);
 		}
 	}
 
 	private EmitICC(method: string, ...args: any[]): void {
-		this.ICC['editor-icc'].emit
-			.apply(this.ICC['editor-icc'], [method].concat(args));
+		this.ICC['toolbar-icc'].emit
+			.apply(this.ICC['toolbar-icc'], [method].concat(args));
 	}
 
-	private init_icc() {
+	private initICC() {
 		const hexToRgbString = (hex): string|null => {
 			const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 			if (result == null) {
