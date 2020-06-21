@@ -108,22 +108,14 @@ export class GSEditor {
 		EICC.on('text-front-color-change', (color: string) => {
 			// tslint:disable-next-line
 			console.log("resive event text-front-color-change", color);
-			const retVal = hexToRgbString(color);
-			if (retVal == null) {
-				return;
-			}
-			color = retVal;
+
 			document.execCommand('foreColor', true, color);
 		});
 
 		EICC.on('text-back-color-change', (color: string) => {
 			// tslint:disable-next-line
 			console.log("resive event text-back-color-change", color);
-			const retVal = hexToRgbString(color);
-			if (retVal == null) {
-				return;
-			}
-			color = retVal;
+
 			document.execCommand('backColor', true, color);
 		});
 
