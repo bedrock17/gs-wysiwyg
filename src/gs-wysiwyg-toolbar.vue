@@ -141,7 +141,7 @@
 					<template v-slot:activator="{ on: menu }">
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on: tooltip }">
-								<v-btn icon tile v-on="{ ...tooltip, ...menu }">
+								<v-btn v-bind:style="{color: toolbarStatus.bColorView}" icon tile v-on="{ ...tooltip, ...menu }">
 									<v-icon>mdi-format-color-fill</v-icon>
 								</v-btn>
 							</template>
@@ -416,7 +416,7 @@
 					<template v-slot:activator="{ on: menu }">
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on: tooltip }">
-								<v-btn icon tile v-on="{ ...tooltip, ...menu }">
+								<v-btn v-bind:style="{color: toolbarStatus.fColorView}" icon tile v-on="{ ...tooltip, ...menu }">
 									<v-icon>mdi-format-color-fill</v-icon>
 								</v-btn>
 							</template>
@@ -561,7 +561,7 @@
 				<template v-slot:activator="{ on: menu }">
 					<v-tooltip bottom>
 						<template v-slot:activator="{ on: tooltip }">
-							<v-btn icon tile v-on="{ ...tooltip, ...menu }">
+							<v-btn v-bind:style="{color: toolbarStatus.fColorView}" icon tile v-on="{ ...tooltip, ...menu }">
 								<v-icon>mdi-format-color-fill</v-icon>
 							</v-btn>
 						</template>
@@ -932,8 +932,23 @@ export default Vue.extend({
 		});
 
 		EICC.on('text-front-color-change', (colorCode: string) => {
+			const rgb = colorCode.replace(/[^\d,]/g, '').split(',');
+			if (rgb[0] === '255' && rgb[1] === '255' && rgb[2] === '255') {
+				colorCode = '#000';
+			}
+
 			this.toolbarStatus.fColorView = colorCode;
 		});
+
+		EICC.on('text-back-color-change', (colorCode: string) => {
+			const rgb = colorCode.replace(/[^\d,]/g, '').split(',');
+			if (rgb[0] === '255' && rgb[1] === '255' && rgb[2] === '255') {
+				colorCode = '#000';
+			}
+
+			this.toolbarStatus.bColorView = colorCode;
+		});
+
 	},
 
 	data: () => ({
@@ -981,6 +996,7 @@ export default Vue.extend({
 
 		toolbarStatus: {
 			fColorView: '#000',
+			bColorView: '#000',
 		},
 
 		elevation: 0,

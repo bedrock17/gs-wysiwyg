@@ -26,6 +26,7 @@ export class GSEditor {
 		{ emitKey: 'cursor-italic', value: '', queryString: 'Italic'},
 		{ emitKey: 'cursor-underline', value: '', queryString: 'Underline'},
 		{ emitKey: 'text-front-color-change', value: '', queryString: 'foreColor'},
+		{ emitKey: 'text-back-color-change', value: '', queryString: 'backColor'},
 	];
 
 	constructor(editorElement: any, icc: any) {
@@ -101,16 +102,10 @@ export class GSEditor {
 
 
 		EICC.on('text-front-color-change', (color: string) => {
-			// tslint:disable-next-line
-			console.log("resive event text-front-color-change", color);
-
 			document.execCommand('foreColor', true, color);
 		});
 
 		EICC.on('text-back-color-change', (color: string) => {
-			// tslint:disable-next-line
-			console.log("resive event text-back-color-change", color);
-
 			document.execCommand('backColor', true, color);
 		});
 
