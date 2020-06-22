@@ -10,7 +10,7 @@
 			<div v-for="(con, idx) in ctx">
 				<v-list-item
 					v-for="c in con"
-					@click="c.func($event, idx, con)"
+					@click="c.func($event, idx, con, ...args)"
 					:key="c.name"
 					style="font-size: 0.8rem; min-height:30px; padding-right:50px;">
 					{{ c.name }}
@@ -26,7 +26,7 @@ import { Vue, Component, Prop, Model } from 'vue-property-decorator';
 
 export interface CtxListItem {
 	name: string;
-	func(evt: MouseEvent, idx: number, con: CtxListItem);
+	func(evt: MouseEvent, idx: number, con: CtxListItem, ...args);
 }
 
 @Component
@@ -40,11 +40,13 @@ export default class ContextList extends Vue {
 	private oriCtx: CtxListItem[][] = this.context;
 	private ctx: CtxListItem[][] = this.oriCtx;
 	private show: boolean = false;
+	private args: any[] = [];
 
-	public open(evt: MouseEvent, ctxList?: CtxListItem[][]): any {
+	public open(evt: MouseEvent, ctxList?: CtxListItem[][], ...args): any {
 		this.x = evt.clientX;
 		this.y = evt.clientY;
 		this.show = true;
+		this.args = args;
 
 		if ( ctxList ) {
 			this.ctx = ctxList;
