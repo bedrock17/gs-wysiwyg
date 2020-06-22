@@ -416,7 +416,7 @@
 					<template v-slot:activator="{ on: menu }">
 						<v-tooltip bottom>
 							<template v-slot:activator="{ on: tooltip }">
-								<v-btn v-bind:style="{color: toolbarStatus.fColorView}" icon tile v-on="{ ...tooltip, ...menu }">
+								<v-btn v-bind:style="{color: toolbarStatus.bColorView}" icon tile v-on="{ ...tooltip, ...menu }">
 									<v-icon>mdi-format-color-fill</v-icon>
 								</v-btn>
 							</template>
