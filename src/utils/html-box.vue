@@ -24,12 +24,14 @@
 					class="pa-0 ma-0 mt-0"
 					v-if="sourceView === 'html'"
 					cols="12">
-					<monaco-editor
-						class="editor"
-						v-model="code"
-						language="html"
-						theme="vs"
-						:options="editorOptions" />
+					<keep-alive>
+						<monaco-editor
+							class="editor"
+							v-model="code"
+							language="html"
+							theme="vs"
+							:options="editorOptions" />
+					</keep-alive>
 				</v-col>
 				<v-col
 					v-else
