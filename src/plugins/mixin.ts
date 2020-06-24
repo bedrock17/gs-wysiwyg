@@ -1,6 +1,6 @@
 import VUE from 'vue';
 import { Component, Vue } from 'vue-property-decorator';
-import Vuetify from 'vuetify';
+import Vuetify from '@/plugins/vuetify';
 
 @Component
 export default class Mixin extends Vue {
@@ -13,7 +13,7 @@ export default class Mixin extends Vue {
 		const instanceComponent = VUE.extend(component);
 
 		if ( typeof options.vuetify === 'undefined' ) {
-			options.vuetify = new Vuetify();
+			options.vuetify = Vuetify;
 		}
 
 		const instance = new instanceComponent(options);

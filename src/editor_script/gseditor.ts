@@ -8,8 +8,11 @@
 import {getRange, getFontBoldState} from './browser';
 import {Queue} from './queue';
 import GlobalMixin from '@/plugins/mixin';
-import HtmlBox from '@/utils/html-box.vue';
 import marked from 'marked';
+
+// custom editor components
+import HtmlBox from '@/utils/html-box.vue';
+import Table from '@/utils/table.vue';
 
 const Mixin = new GlobalMixin();
 
@@ -20,7 +23,7 @@ interface ParseState {
 }
 
 export class GSEditor {
-
+	private brDiv!: HTMLElement;
 	private editorDivTagElement: any;
 	private ICC: any;
 	// private lastKeyPos
@@ -34,6 +37,8 @@ export class GSEditor {
 	];
 
 	constructor(editorElement: any, icc: any) {
+		this.brDiv = document.createElement('div');
+		this.brDiv.innerHTML = '<br />';
 		this.editorDivTagElement = editorElement;
 		this.ICC = icc;
 		this.initICC();
@@ -127,6 +132,29 @@ export class GSEditor {
 		EICC.on('insert-table', () => {
 			// tslint:disable-next-line
 			console.log("resive event insert-table");
+
+			this.editorDivTagElement.focus();
+			const range = getRange();
+			if ( range === null ) {
+				return;
+			}
+
+			let target = range.commonAncestorContainer as HTMLElement;
+
+			if ( target.className === this.editorDivTagElement.className) {
+				target = document.createElement('div');
+				this.editorDivTagElement.appendChild(target);
+				this.editorDivTagElement.appendChild(this.brDiv);
+			}
+
+
+			const instance = Mixin.mount(Table, {
+				propsData: { editable: true },
+			}, target);
+			const element = instance.$el as HTMLElement;
+			if ( element.isContentEditable ) {
+				element.setAttribute('contenteditable', 'false');
+			}
 		});
 
 		EICC.on('insert-html', () => {
@@ -143,6 +171,7 @@ export class GSEditor {
 			if ( target.className === this.editorDivTagElement.className) {
 				target = document.createElement('div');
 				this.editorDivTagElement.appendChild(target);
+				this.editorDivTagElement.appendChild(this.brDiv);
 			}
 
 			const instance = Mixin.mount(HtmlBox, {
