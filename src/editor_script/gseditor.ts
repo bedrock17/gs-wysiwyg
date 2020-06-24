@@ -7,6 +7,10 @@
 
 import {getRange, getFontBoldState} from './browser';
 import {Queue} from './queue';
+import GlobalMixin from '@/plugins/mixin';
+import HtmlBox from '@/utils/html-box.vue';
+
+const Mixin = new GlobalMixin();
 
 interface ParseState {
 	value: string;
@@ -41,7 +45,7 @@ export class GSEditor {
 	// 현재 상태를 파싱해서 툴바를 업데이트 한다.
 	public updateToolbar(): void {
 		const range = getRange();
-		if (range == null) {
+		if (range === null) {
 			return;
 		}
 
@@ -124,9 +128,29 @@ export class GSEditor {
 			console.log("resive event insert-table");
 		});
 
-		EICC.on('view-html', () => {
+		EICC.on('insert-html', () => {
 			// tslint:disable-next-line
-			console.log("resive event view-html");
+			console.log("resive event insert-html");
+			this.editorDivTagElement.focus();
+			const range = getRange();
+			if ( range === null ) {
+				return;
+			}
+
+			let target = range.commonAncestorContainer as HTMLElement;
+
+			if ( target.className === this.editorDivTagElement.className) {
+				target = document.createElement('div');
+				this.editorDivTagElement.appendChild(target);
+			}
+
+			const instance = Mixin.mount(HtmlBox, {
+				propsData: { editable: true },
+			}, target);
+			const element = instance.$el as HTMLElement;
+			if ( element.isContentEditable ) {
+				element.setAttribute('contenteditable', 'false');
+			}
 		});
 
 		EICC.on('view-markdown', () => {

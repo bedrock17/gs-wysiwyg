@@ -22,7 +22,7 @@ import Vue from 'vue';
 import ICC from './icc';
 import {GSEditor} from './editor_script/gseditor';
 import Table from '@/utils/table.vue';
-import Component from 'vue-class-component';
+import { Component } from 'vue-property-decorator';
 import HtmlBox from '@/utils/html-box.vue';
 
 // @Component 데코레이터는 클래스가 Vue 컴포넌트임을 나타냅니다.

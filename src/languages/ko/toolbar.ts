@@ -11,7 +11,7 @@ export default {
 	'bg-color': '배경 색상',
 	'picture': '사진 추가',
 	'table': '표',
-	'source': '소스 편집',
+	'source': 'HTML 상자 추가',
 	'markdown': '마크다운',
 	'bold': '굵게',
 	'italic': '기울임',
