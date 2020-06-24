@@ -9,6 +9,7 @@ import {getRange, getFontBoldState} from './browser';
 import {Queue} from './queue';
 import GlobalMixin from '@/plugins/mixin';
 import HtmlBox from '@/utils/html-box.vue';
+import marked from 'marked';
 
 const Mixin = new GlobalMixin();
 
@@ -153,9 +154,54 @@ export class GSEditor {
 			}
 		});
 
-		EICC.on('view-markdown', () => {
+		EICC.on('apply-markdown', () => {
 			// tslint:disable-next-line
-			console.log("resive event view-markdown");
+			console.log("resive event apply-markdown");
+
+			this.editorDivTagElement.focus();
+			const range = getRange();
+			if ( range === null ) {
+				return;
+			}
+
+			const target = range.commonAncestorContainer as HTMLElement;
+			let allText = '';
+			let sibling = range.startContainer as HTMLElement;
+			if ( sibling.nodeName === '#text' ) {
+				// We always text exists in one div in per line
+				sibling = sibling.parentElement as HTMLElement;
+			}
+
+			let insertFlagNode = sibling.previousSibling as HTMLElement;
+
+			if ( sibling.className === this.editorDivTagElement.className ) {
+				allText = sibling.innerText;
+				sibling.innerHTML = '';
+			} else {
+				while ( sibling ) {
+					const tmp = sibling;
+					allText += sibling.textContent + '\n';
+					sibling = sibling.nextSibling as HTMLElement;
+					tmp.remove();
+				}
+			}
+
+			const mdText = marked(allText).replace(/\n/g , '<br />');
+			for ( const mdLine of mdText.split('\n') ) {
+				const div = document.createElement('div');
+				div.innerHTML = mdLine;
+
+				if ( insertFlagNode && insertFlagNode.nextSibling ) {
+					insertFlagNode = insertFlagNode.nextSibling as HTMLElement;
+				}
+
+				if ( insertFlagNode === null || insertFlagNode.nextSibling === null ) {
+					console.log(div);
+					this.editorDivTagElement.appendChild(div);
+				} else {
+					insertFlagNode.insertBefore(div, insertFlagNode.nextSibling);
+				}
+			}
 		});
 
 		EICC.on('code-block', (code: string) => {

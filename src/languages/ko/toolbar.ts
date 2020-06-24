@@ -12,7 +12,7 @@ export default {
 	'picture': '사진 추가',
 	'table': '표',
 	'source': 'HTML 상자 추가',
-	'markdown': '마크다운',
+	'markdown': '마크다운 적용',
 	'bold': '굵게',
 	'italic': '기울임',
 	'underline': '밑줄',
