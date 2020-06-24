@@ -7,6 +7,7 @@
 		@keypress="updateEditerToolbar">
 		</div>
 		<Table :editable="true"/>
+		<html-box :editable="true" />
 	</div>
 </template>
 
@@ -22,11 +23,13 @@ import ICC from './icc';
 import {GSEditor} from './editor_script/gseditor';
 import Table from '@/utils/table.vue';
 import Component from 'vue-class-component';
+import HtmlBox from '@/utils/html-box.vue';
 
 // @Component 데코레이터는 클래스가 Vue 컴포넌트임을 나타냅니다.
 @Component({
 	components: {
 		Table,
+		HtmlBox,
 	},
 })
 export default class EditorComponent extends Vue {
