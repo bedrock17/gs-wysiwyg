@@ -39,7 +39,7 @@ import { VueGoodTable } from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css';
 import ContextList from './context-list.vue';
 import { CtxListItem } from './context-list.vue';
-import { Vue, Component, Prop, Mixins } from 'vue-property-decorator';
+import { Component, Prop, Mixins } from 'vue-property-decorator';
 import GlobalMixins from '@/plugins/mixin';
 import { getRange } from '@/editor_script/browser';
 

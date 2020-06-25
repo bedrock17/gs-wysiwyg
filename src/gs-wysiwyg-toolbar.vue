@@ -175,7 +175,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="viewHTML">
+						<v-btn icon tile v-on="on" @click="insertHTML">
 							<v-icon>mdi-xml</v-icon>
 						</v-btn>
 					</template>
@@ -183,7 +183,7 @@
 				</v-tooltip>
 				<v-tooltip bottom>
 					<template v-slot:activator="{ on }">
-						<v-btn icon tile v-on="on" @click="viewMarkDown">
+						<v-btn icon tile v-on="on" @click="applyMarkDown">
 							<v-icon>mdi-language-markdown</v-icon>
 						</v-btn>
 					</template>
@@ -800,15 +800,15 @@ export default Vue.extend({
 			console.log("clicked insert-table");
 			EmitICC('insert-table');
 		},
-		viewHTML() {
+		insertHTML() {
 			// tslint:disable-next-line
-			console.log("clicked view-html");
-			EmitICC('view-html');
+			console.log("clicked insert-html");
+			EmitICC('insert-html');
 		},
-		viewMarkDown() {
+		applyMarkDown() {
 			// tslint:disable-next-line
-			console.log("clicked view-markdown");
-			EmitICC('view-markdown');
+			console.log("clicked apply-markdown");
+			EmitICC('apply-markdown');
 		},
 		/* E:Utility */
 

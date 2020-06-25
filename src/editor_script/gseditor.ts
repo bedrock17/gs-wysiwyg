@@ -7,6 +7,14 @@
 
 import {getRange, getFontBoldState} from './browser';
 import {Queue} from './queue';
+import GlobalMixin from '@/plugins/mixin';
+import marked from 'marked';
+
+// custom editor components
+import HtmlBox from '@/utils/html-box.vue';
+import Table from '@/utils/table.vue';
+
+const Mixin = new GlobalMixin();
 
 interface ParseState {
 	value: string;
@@ -15,7 +23,7 @@ interface ParseState {
 }
 
 export class GSEditor {
-
+	private brDiv!: HTMLElement;
 	private editorDivTagElement: any;
 	private ICC: any;
 	// private lastKeyPos
@@ -30,6 +38,8 @@ export class GSEditor {
 	];
 
 	constructor(editorElement: any, icc: any) {
+		this.brDiv = document.createElement('div');
+		this.brDiv.innerHTML = '<br />';
 		this.editorDivTagElement = editorElement;
 		this.ICC = icc;
 		this.initICC();
@@ -42,7 +52,7 @@ export class GSEditor {
 	// 현재 상태를 파싱해서 툴바를 업데이트 한다.
 	public updateToolbar(): void {
 		const range = getRange();
-		if (range == null) {
+		if (range === null) {
 			return;
 		}
 
@@ -117,16 +127,105 @@ export class GSEditor {
 		EICC.on('insert-table', () => {
 			// tslint:disable-next-line
 			console.log("resive event insert-table");
+
+			this.editorDivTagElement.focus();
+			const range = getRange();
+			if ( range === null ) {
+				return;
+			}
+
+			let target = range.commonAncestorContainer as HTMLElement;
+
+			if ( target.className === this.editorDivTagElement.className) {
+				target = document.createElement('div');
+				this.editorDivTagElement.appendChild(target);
+				this.editorDivTagElement.appendChild(this.brDiv);
+			}
+
+
+			const instance = Mixin.mount(Table, {
+				propsData: { editable: true },
+			}, target);
+			const element = instance.$el as HTMLElement;
+			if ( element.isContentEditable ) {
+				element.setAttribute('contenteditable', 'false');
+			}
 		});
 
-		EICC.on('view-html', () => {
+		EICC.on('insert-html', () => {
 			// tslint:disable-next-line
-			console.log("resive event view-html");
+			console.log("resive event insert-html");
+			this.editorDivTagElement.focus();
+			const range = getRange();
+			if ( range === null ) {
+				return;
+			}
+
+			let target = range.commonAncestorContainer as HTMLElement;
+
+			if ( target.className === this.editorDivTagElement.className) {
+				target = document.createElement('div');
+				this.editorDivTagElement.appendChild(target);
+				this.editorDivTagElement.appendChild(this.brDiv);
+			}
+
+			const instance = Mixin.mount(HtmlBox, {
+				propsData: { editable: true },
+			}, target);
+			const element = instance.$el as HTMLElement;
+			if ( element.isContentEditable ) {
+				element.setAttribute('contenteditable', 'false');
+			}
 		});
 
-		EICC.on('view-markdown', () => {
+		EICC.on('apply-markdown', () => {
 			// tslint:disable-next-line
-			console.log("resive event view-markdown");
+			console.log("resive event apply-markdown");
+
+			this.editorDivTagElement.focus();
+			const range = getRange();
+			if ( range === null ) {
+				return;
+			}
+
+			const target = range.commonAncestorContainer as HTMLElement;
+			let allText = '';
+			let sibling = range.startContainer as HTMLElement;
+			if ( sibling.nodeName === '#text' ) {
+				// We always text exists in one div in per line
+				sibling = sibling.parentElement as HTMLElement;
+			}
+
+			let insertFlagNode = sibling.previousSibling as HTMLElement;
+
+			if ( sibling.className === this.editorDivTagElement.className ) {
+				allText = sibling.innerText;
+				sibling.innerHTML = '';
+			} else {
+				while ( sibling ) {
+					const tmp = sibling;
+					allText += sibling.textContent + '\n';
+					sibling = sibling.nextSibling as HTMLElement;
+					tmp.remove();
+				}
+			}
+
+			const mdText = marked(allText).replace(/\n/g , '<br />');
+			for ( const mdLine of mdText.split('\n') ) {
+				const div = document.createElement('div');
+				div.innerHTML = mdLine;
+
+				if ( insertFlagNode && insertFlagNode.nextSibling ) {
+					insertFlagNode = insertFlagNode.nextSibling as HTMLElement;
+				}
+
+				if ( insertFlagNode === null || insertFlagNode.nextSibling === null ) {
+					console.log(div);
+					this.editorDivTagElement.appendChild(div);
+				} else {
+					insertFlagNode.insertBefore(div, insertFlagNode.nextSibling);
+				}
+			}
 		});
 
 		EICC.on('code-block', (code: string) => {
