@@ -49,6 +49,21 @@ export class GSEditor {
 		return this.editorDivTagElement.innerHTML;
 	}
 
+	public insertTab(event: KeyboardEvent): void {
+		event.preventDefault();
+
+		const doc = this.editorDivTagElement.ownerDocument.defaultView;
+		const sel = doc.getSelection();
+		const range = sel.getRangeAt(0);
+		const tabNode = document.createTextNode('\u00a0\u00a0\u00a0\u00a0');
+
+		range.insertNode(tabNode);
+		range.setStartAfter(tabNode);
+		range.setEndAfter(tabNode);
+		sel.removeAllRanges();
+		sel.addRange(range);
+	}
+
 	// 현재 상태를 파싱해서 툴바를 업데이트 한다.
 	public updateToolbar(): void {
 		const range = getRange();

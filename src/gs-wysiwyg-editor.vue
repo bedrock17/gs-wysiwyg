@@ -3,8 +3,10 @@
 		<div class="gs-editor" ref="editor" contenteditable 
 		@input="handleInput" 
 		@mouseup="updateEditerToolbar"
+		@keydown.tab="editor.insertTab"
 		@keydown="updateEditerToolbar"
-		@keypress="updateEditerToolbar">
+		@keypress="updateEditerToolbar"
+		>
 		</div>
 		<Table :editable="true"/>
 		<html-box :editable="true" />
@@ -25,7 +27,6 @@ import Table from '@/utils/table.vue';
 import { Component } from 'vue-property-decorator';
 import HtmlBox from '@/utils/html-box.vue';
 
-// @Component 데코레이터는 클래스가 Vue 컴포넌트임을 나타냅니다.
 @Component({
 	components: {
 		Table,
@@ -41,7 +42,7 @@ export default class EditorComponent extends Vue {
 		}
 	}
 
-	private updateEditerToolbar(): void {
+	private updateEditerToolbar(event: any): void {
 		// 현재 커서의 상태를 보고
 		// toolbar로 이벤트를 보낸다.
 		if (this.editor != null) {
