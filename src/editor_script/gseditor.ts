@@ -1,11 +1,10 @@
-
 /* Editor class
 
 에디터의 구현 코드
 
 */
 
-import {getRange, getFontBoldState} from './browser';
+import {getRange, getFontBoldState, compareRangeContainer} from './browser';
 import {Queue} from './queue';
 import GlobalMixin from '@/plugins/mixin';
 import marked from 'marked';
@@ -21,6 +20,29 @@ interface ParseState {
 	emitKey: string;
 	queryString: string;
 }
+
+/*
+interface Range {
+	each(func: (r: Node, idx: number) => boolean);
+}
+*/
+
+// TODO: How to add prototype function?
+// @ts-ignore
+Range.prototype.each = function(func: (r: Node, idx: number) => boolean) {
+	const range = this;
+	let sib: (Node | null) = range.startContainer;
+	let i = 0;
+	do {
+		const result = func(sib, i++);
+
+		if ( result === true ) {
+			break;
+		}
+
+		sib = sib.nextSibling;
+	} while ( sib && !compareRangeContainer(range, sib as HTMLElement) );
+};
 
 export class GSEditor {
 	private brDiv!: HTMLElement;
@@ -193,43 +215,39 @@ export class GSEditor {
 				return;
 			}
 
-			const target = range.commonAncestorContainer as HTMLElement;
 			let allText = '';
-			let sibling = range.startContainer as HTMLElement;
-			if ( sibling.nodeName === '#text' ) {
-				// We always text exists in one div in per line
-				sibling = sibling.parentElement as HTMLElement;
-			}
 
-			let insertFlagNode = sibling.previousSibling as HTMLElement;
-
-			if ( sibling.className === this.editorDivTagElement.className ) {
-				allText = sibling.innerText;
-				sibling.innerHTML = '';
+			if ( this.isAllSelected(range as Range) ) {
+				allText = this.editorDivTagElement.innerText.replace(/\n\n/g, '<br/>\n');
+				const mdText = marked(allText);
+				this.editorDivTagElement.innerHTML = mdText;
 			} else {
-				while ( sibling ) {
-					const tmp = sibling;
-					allText += sibling.textContent + '\n';
-					sibling = sibling.nextSibling as HTMLElement;
-					tmp.remove();
-				}
-			}
+				// @ts-ignore
+				range.each((sib, idx) => {
+					allText += sib.textContent + '\n<br/>';
+				});
 
-			const mdText = marked(allText).replace(/\n/g , '<br />');
-			for ( const mdLine of mdText.split('\n') ) {
-				const div = document.createElement('div');
-				div.innerHTML = mdLine;
-
-				if ( insertFlagNode && insertFlagNode.nextSibling ) {
-					insertFlagNode = insertFlagNode.nextSibling as HTMLElement;
-				}
-
-				if ( insertFlagNode === null || insertFlagNode.nextSibling === null ) {
-					console.log(div);
-					this.editorDivTagElement.appendChild(div);
-				} else {
-					insertFlagNode.insertBefore(div, insertFlagNode.nextSibling);
-				}
+				const mdText = marked(allText);
+				const mdSplitText = mdText.split('\n');
+				// @ts-ignore
+				range.each((sib, idx) => {
+					if ( idx < mdSplitText.length ) {
+						if ( sib.nodeName === '#text' ) {
+							const div = document.createElement('div');
+							div.innerHTML = mdSplitText[idx];
+							if ( sib.previousSibling === null ) {
+								this.editorDivTagElement.prepend(div);
+								sib.remove();
+							} else if ( sib.nextSibling ) {
+								this.editorDivTagElement.insertBefore(div, sib.nextSibling);
+							}
+						} else {
+							sib.innerHTML = mdSplitText[idx];
+						}
+					} else {
+						sib.remove();
+					}
+				});
 			}
 		});
 
@@ -292,6 +310,19 @@ export class GSEditor {
 			console.log("resive event del-link");
 		});
 
+	}
+
+	private isEditorElement(element: (HTMLElement | Node | ChildNode | Element)) {
+		const htmlElement = element as HTMLElement;
+		return htmlElement.className === this.editorDivTagElement.className;
+	}
+
+	private isAllSelected(range: Range) {
+		if ( this.isEditorElement(range.startContainer) ) {
+			return true;
+		}
+
+		return range.toString() === this.editorDivTagElement.innerText.replace(/\n/g, '');
 	}
 
 }
