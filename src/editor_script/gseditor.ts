@@ -56,6 +56,7 @@ export class GSEditor {
 		{ emitKey: 'cursor-italic', value: '', queryString: 'Italic'},
 		{ emitKey: 'cursor-underline', value: '', queryString: 'Underline'},
 		{ emitKey: 'text-front-color-change', value: '', queryString: 'foreColor'},
+		{ emitKey: 'text-back-color-change', value: '', queryString: 'backColor'},
 	];
 
 	constructor(editorElement: any, icc: any) {
@@ -68,6 +69,21 @@ export class GSEditor {
 
 	public getHTML(): string {
 		return this.editorDivTagElement.innerHTML;
+	}
+
+	public insertTab(event: KeyboardEvent): void {
+		event.preventDefault();
+
+		const doc = this.editorDivTagElement.ownerDocument.defaultView;
+		const sel = doc.getSelection();
+		const range = sel.getRangeAt(0);
+		const tabNode = document.createTextNode('\u00a0\u00a0\u00a0\u00a0');
+
+		range.insertNode(tabNode);
+		range.setStartAfter(tabNode);
+		range.setEndAfter(tabNode);
+		sel.removeAllRanges();
+		sel.addRange(range);
 	}
 
 	// 현재 상태를 파싱해서 툴바를 업데이트 한다.
@@ -133,16 +149,10 @@ export class GSEditor {
 
 
 		EICC.on('text-front-color-change', (color: string) => {
-			// tslint:disable-next-line
-			console.log("resive event text-front-color-change", color);
-
 			document.execCommand('foreColor', true, color);
 		});
 
 		EICC.on('text-back-color-change', (color: string) => {
-			// tslint:disable-next-line
-			console.log("resive event text-back-color-change", color);
-
 			document.execCommand('backColor', true, color);
 		});
 
