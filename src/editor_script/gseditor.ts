@@ -241,7 +241,6 @@ export class GSEditor {
 					const mdText = marked(allText);
 
 					if (sel.rangeCount) {
-						// const range = sel.getRangeAt(0);
 						range.deleteContents();
 
 						const mdElement = document.createElement('div');
