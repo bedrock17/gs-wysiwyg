@@ -4,7 +4,7 @@
 
 */
 
-import {getRange, getFontBoldState, compareRangeContainer} from './browser';
+import {getRange, compareRangeContainer} from './browser';
 import {Queue} from './queue';
 import GlobalMixin from '@/plugins/mixin';
 import marked from 'marked';
@@ -229,36 +229,29 @@ export class GSEditor {
 
 			if ( this.isAllSelected(range as Range) ) {
 				allText = this.editorDivTagElement.innerText.replace(/\n\n/g, '<br/>\n');
-				const mdText = marked(allText);
-				this.editorDivTagElement.innerHTML = mdText;
-			} else {
-				// @ts-ignore
-				range.each((sib, idx) => {
-					allText += sib.textContent + '\n<br/>';
-				});
 
 				const mdText = marked(allText);
-				const mdSplitText = mdText.split('\n');
-				// @ts-ignore
-				range.each((sib, idx) => {
-					if ( idx < mdSplitText.length ) {
-						if ( sib.nodeName === '#text' ) {
-							const div = document.createElement('div');
-							div.innerHTML = mdSplitText[idx];
-							if ( sib.previousSibling === null ) {
-								this.editorDivTagElement.prepend(div);
-								sib.remove();
-							} else if ( sib.nextSibling ) {
-								this.editorDivTagElement.insertBefore(div, sib.nextSibling);
-							}
-						} else {
-							sib.innerHTML = mdSplitText[idx];
-						}
-					} else {
-						sib.remove();
+
+				this.editorDivTagElement.innerHTML = mdText;
+			} else {
+
+				const sel = window.getSelection();
+				if (sel !== null) {
+					allText = sel.toString();
+					const mdText = marked(allText);
+
+					if (sel.rangeCount) {
+						// const range = sel.getRangeAt(0);
+						range.deleteContents();
+
+						const mdElement = document.createElement('div');
+						mdElement.innerHTML = mdText;
+
+						range.insertNode(mdElement);
 					}
-				});
+				}
 			}
+
 		});
 
 		EICC.on('code-block', (code: string) => {

@@ -14,11 +14,6 @@ export const getRange = (): Range| null => {
 	return sel.getRangeAt(0);
 };
 
-export const getFontBoldState = (): string => {
-	return document.queryCommandValue('Bold');
-	// return document.queryCommandValue("ForeColor");
-};
-
 export const compareRangeContainer = (r: Range, element: HTMLElement) => {
 	const range = r.cloneRange();
 	range.setStart(element as Node, 0);
