@@ -229,24 +229,41 @@ export class GSEditor {
 
 			if ( this.isAllSelected(range as Range) ) {
 				allText = this.editorDivTagElement.innerText.replace(/\n\n/g, '<br/>\n');
-
 				const mdText = marked(allText);
-
 				this.editorDivTagElement.innerHTML = mdText;
 			} else {
 
 				const sel = window.getSelection();
 				if (sel !== null) {
-					allText = sel.toString();
-					const mdText = marked(allText);
+					if (sel.anchorNode !== null) {
+						if (sel.focusNode !== null) {
+							const position = sel.anchorNode.compareDocumentPosition(sel.focusNode);
+							let startNode = sel.anchorNode;
+							let endNode = sel.focusNode;
 
-					if (sel.rangeCount) {
-						range.deleteContents();
+							// endNode가 앞에있는경우 처리
+							// https://developer.mozilla.org/en-US/docs/Web/API/Node/compareDocumentPosition
+							/* tslint:disable:no-bitwise */
+							if (position & Node.DOCUMENT_POSITION_PRECEDING) {
+								startNode = sel.focusNode;
+								endNode = sel.anchorNode;
+							}
 
-						const mdElement = document.createElement('div');
-						mdElement.innerHTML = mdText;
+							if (endNode.textContent !== null) {
+								sel.setBaseAndExtent(startNode, 0, endNode, endNode.textContent.length);
 
-						range.insertNode(mdElement);
+								allText = sel.toString();
+								const mdText = marked(allText);
+
+								const replaceRange = sel.getRangeAt(0);
+								if (sel.rangeCount) {
+									replaceRange.deleteContents();
+									const mdElement = document.createElement('div');
+									mdElement.innerHTML = mdText;
+									replaceRange.insertNode(mdElement);
+								}
+							}
+						}
 					}
 				}
 			}
