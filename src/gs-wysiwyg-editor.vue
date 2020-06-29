@@ -26,6 +26,7 @@ import {GSEditor} from './editor_script/gseditor';
 import Table from '@/utils/table.vue';
 import { Component } from 'vue-property-decorator';
 import HtmlBox from '@/utils/html-box.vue';
+import { GSHotKey } from '@/editor_script/hotkey';
 
 @Component({
 	components: {
@@ -35,6 +36,7 @@ import HtmlBox from '@/utils/html-box.vue';
 })
 export default class EditorComponent extends Vue {
 	private editor: GSEditor | null = null;
+	private hotkey: GSHotKey | null = null;
 
 	private handleInput(): void {
 		if (this.editor != null) {
@@ -53,6 +55,7 @@ export default class EditorComponent extends Vue {
 	private mounted() {
 		const EICC = ICC['editor-icc'];
 		this.editor = new GSEditor(this.$refs.editor, ICC);
+		this.hotkey = new GSHotKey(this.$refs.editor as HTMLElement);
 	}
 }
 
