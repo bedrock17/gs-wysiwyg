@@ -15,9 +15,11 @@
 		"object-literal-sort-keys": false,
 		"ordered-imports": false,
 		"quotemark": [true, "single"],
+		"semicolon": true,
 		"comment-format": {
 			"severity": "warning"
 		},
+  
 		"no-console": false,
 		"only-arrow-functions": false,
 		"one-variable-per-declaration": false,

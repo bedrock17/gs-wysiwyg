@@ -10,12 +10,18 @@
 		</div>
 		<Table :editable="true"/>
 		<html-box :editable="true" />
+		
+		<div v-if="editor != null">
+			<Picture v-model="editor.showPictureDialog" v-if="editor.showPictureDialog"> </Picture>
+			
+		</div>
 	</div>
 </template>
 
 <style>
 	.gs-editor {
 		padding: 1rem 2.5rem;
+		overflow: hidden;
 	}
 </style>
 
@@ -27,11 +33,13 @@ import Table from '@/utils/table.vue';
 import { Component } from 'vue-property-decorator';
 import HtmlBox from '@/utils/html-box.vue';
 import { GSHotKey } from '@/editor_script/hotkey';
+import Picture from '@/components/picture.vue';
 
 @Component({
 	components: {
 		Table,
 		HtmlBox,
+		Picture,
 	},
 })
 export default class EditorComponent extends Vue {
@@ -58,7 +66,4 @@ export default class EditorComponent extends Vue {
 		this.hotkey = new GSHotKey(this.$refs.editor as HTMLElement);
 	}
 }
-
-
-
 </script>

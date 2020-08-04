@@ -45,10 +45,11 @@ Range.prototype.each = function(func: (r: Node, idx: number) => boolean) {
 };
 
 export class GSEditor {
+	public showPictureDialog: boolean = false;
+
 	private brDiv!: HTMLElement;
 	private editorDivTagElement: any;
 	private ICC: any;
-	// private lastKeyPos
 
 	private parseList: ParseState[] =  [
 		{ emitKey: 'cursor-bold', value: '', queryString: 'Bold'},
@@ -112,18 +113,7 @@ export class GSEditor {
 	}
 
 	private initICC() {
-		const hexToRgbString = (hex): string|null => {
-			const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-			if (result == null) {
-				return null;
-			}
 
-			const r = parseInt(result[1], 16).toString();
-			const g = parseInt(result[2], 16).toString();
-			const b = parseInt(result[3], 16).toString();
-
-			return `rgba(${r},${g},${b},1)`;
-		};
 
 		const EICC = this.ICC['editor-icc'];
 
@@ -159,6 +149,7 @@ export class GSEditor {
 		EICC.on('insert-picture', () => {
 			// tslint:disable-next-line
 			console.log("resive event insert-picture");
+			this.showPictureDialog = true;
 		});
 
 		EICC.on('insert-table', () => {
