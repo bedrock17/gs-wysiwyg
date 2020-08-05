@@ -12,8 +12,7 @@
 		<html-box :editable="true" />
 		
 		<div v-if="editor != null">
-			<Picture v-model="editor.showPictureDialog" v-if="editor.showPictureDialog"> </Picture>
-			
+			<Picture v-model="editor.showPictureDialog"> </Picture>
 		</div>
 	</div>
 </template>

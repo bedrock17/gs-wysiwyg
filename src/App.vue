@@ -14,13 +14,13 @@
 </template>
 
 <style lang="css">
-    .gs-editor {
+	.gs-editor {
 		border: 1px solid rgb(22, 97, 181);
 		/* border-radius: 10px; */
-        width: calc(100%-20px);
-        min-height: 200px;
+		width: calc(100%-20px);
+		min-height: 200px;
 		margin: 10px;
-    }
+	}
 </style>
 
 <script lang="ts">

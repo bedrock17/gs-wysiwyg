@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-dialog v-model="show" class="wrap">
+		<v-dialog v-model="$attrs.value" class="wrap">
 			<v-card>
 				<v-card-title>
 					<span>Image</span>
@@ -57,21 +57,15 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Component, Watch, Prop } from 'vue-property-decorator';
-import { ImageUploader } from '@/editor_script/types';
+import { ImageUploader, ImageUploaderParam} from '@/editor_script/types';
 
 @Component
 export default class PicturePopup extends Vue {
 
-	@Prop({default: true}) private dialog: boolean = true;
-	@Prop({default: null}) private uploader: ImageUploader | null = null;
+	// @Prop() private uploader: ImageUploader | null = null;
+	// @Prop() private uploaderParam: ImageUploaderParam | null = null;
 
 	private url: string = '';
-
-	private show: boolean = true;
-
-	private mounted() {
-		this.show = this.dialog;
-	}
 
 	private changeHandler() {
 		const file = this.$refs.file as HTMLInputElement;
@@ -91,11 +85,8 @@ export default class PicturePopup extends Vue {
 
 	}
 
-	@Watch('show')
 	private closeDialog(): void {
 		this.$emit('input', false);
 	}
-
-	//TODO: 이미지 업로드 처리
 }
 </script>
