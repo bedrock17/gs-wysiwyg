@@ -113,9 +113,12 @@ export class GSEditor {
 	}
 
 	private initICC() {
-
-
 		const EICC = this.ICC['editor-icc'];
+
+		EICC.on('insert-image', (htmlString: string) => {
+			this.editorDivTagElement.focus();
+			document.execCommand('insertHTML', true, htmlString);
+		});
 
 		EICC.on('erase', () => {
 			// tslint:disable-next-line

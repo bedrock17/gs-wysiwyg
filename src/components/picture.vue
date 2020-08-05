@@ -9,12 +9,12 @@
 				<form ref="form">
 					<input type="file" name="image" @change="changeHandler" ref="file">
 				</form>
-				<div class="ve-preview" v-if="url"><img :src="url"></div>
+				<div class="ve-preview" v-if="url"><img :src="url" ref="image"></div>
 				<v-card-actions>
-					<v-btn color="primary" text @click="closeDialog()" >
+					<v-btn color="primary" text @click="closeDialog" >
 						CANCEL
 					</v-btn>
-					<v-btn color="primary" text>
+					<v-btn color="primary" text @click="insertImage">
 						OK
 					</v-btn>
 				</v-card-actions>
@@ -58,6 +58,9 @@
 import Vue from 'vue';
 import { Component, Watch, Prop } from 'vue-property-decorator';
 import { ImageUploader, ImageUploaderParam} from '@/editor_script/types';
+import icc from '../icc';
+
+const editorICC = icc['editor-icc'];
 
 @Component
 export default class PicturePopup extends Vue {
@@ -82,11 +85,32 @@ export default class PicturePopup extends Vue {
 		if (item.type.indexOf('image') !== -1) {
 			this.url = window.URL.createObjectURL(item);
 		}
-
 	}
 
 	private closeDialog(): void {
+		this.url = '';
+
+		const file = this.$refs.file as HTMLInputElement;
+		if (file !== null) {
+			file.value = '';
+		}
+
 		this.$emit('input', false);
+	}
+
+	private insertImage() {
+		// TODO: 업로드가 가능하다면 업로드된 URL을 넣어주도록 수정
+
+		const imgTag = document.createElement('img');
+		let htmlString = '';
+
+		if (imgTag !== null) {
+			imgTag.setAttribute('src', this.url);
+			htmlString = imgTag.outerHTML;
+		}
+
+		editorICC.emit('insert-image', htmlString);
+		this.closeDialog();
 	}
 }
 </script>
